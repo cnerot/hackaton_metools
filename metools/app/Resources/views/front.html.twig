@@ -3,10 +3,17 @@
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 {% endblock %}
-{% block header %}
-    {{ parent() }}
-    <div>
-        <img src="{% block header_img %}test.png{% endblock %}">
-        <div>{% block header_content %}</div>
-      </div>
+{% block body %}
+    <div class="container-fluid">
+        {% block header %}
+            {{ parent() }}
+            <div class="row">
+                <div class="header col-lg-12">
+                    <img src="{% block header_img %}{{ asset('img/placeholder.jpg') }}{% endblock %}">
+                </div>
+            </div>
+        {% endblock %}
+        {% block front %}
+        {% endblock %}
+    </div>
 {% endblock %}
