@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+{% block header %}
+    {{ parent() }}
+    <div>
+        <img src="{% block header_img %}test.png{% endblock %}">
+        <div>{% block header_content %}</div>
+      </div>
+{% endblock %}
