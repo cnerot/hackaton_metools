@@ -1,0 +1,101 @@
+{% extends 'admin.html.twig' %}
+
+{% block body %}
+    <div class="img"></div>
+    <div class="user_data">
+        <p>nom</p>
+        <p>prenom</p>
+        <p>age</p>
+        <p>email</p>
+        <p>address</p>
+    </div>
+    <div class="skill_graph">
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+
+    <div class="user_skills">
+        <div class="user_mainskills">
+            <h3>competences principales</h3>
+            {% for i in 1..3 %}
+                <div class="mainskill">
+                    <div class="skill_data">
+                        <p>skill name</p>
+                        <p>user lvl</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="user_skills">
+            <h3>toutes competences</h3>
+            {% for i in 1..10 %}
+                <div class="skill">
+                    <div class="skill_data">
+                        <p>skill name</p>
+                        <p>user lvl</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var data = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+                {
+                    label: "Competence 1",
+                    backgroundColor: "rgba(255, 255, 255, 0)",
+                    borderColor: "rgba(75,192,192,1)",
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: "rgba(75,192,192,1)",
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 5,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHitRadius: 10,
+                    data: [1, 2, 4, 3, 3, 4, 5],
+                    spanGaps: false,
+                },
+                {
+                    label: "Competence 2",
+                    backgroundColor: "rgba(255, 255, 255, 0)",
+                    borderColor: "rgba(75,1,192,1)",
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: "rgba(75,1,192,1)",
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 5,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHitRadius: 10,
+                    data: [3, 2, 2, 3, 2, 3, 3],
+                    spanGaps: false,
+                }
+            ]
+        };
+
+        var ctx = document.getElementById("myChart");
+        var myLineChart = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: {
+                scales: {
+                    xAxes: [{
+                        display: false
+                    }]
+                }
+            }
+        });
+    </script>
+{% endblock %}
