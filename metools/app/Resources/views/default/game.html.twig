@@ -1,6 +1,6 @@
 {% extends 'front.html.twig' %}
     {% block header %} {% endblock %}
-    {% block body %}
+    {% block front %}
         <div class="progression-jeu">
             <div class="pourcentage">
                 Progression : x%
@@ -11,58 +11,95 @@
             <hr>
         </div>
         <!-- if QCM -->
-        <div class="question">
-            <b>QCM</b><br />
-            Parmi les proposition suivantes, laquelle n'est pas un verbe http ?
-        </div>
-        <div class="reponses">
-            <button class="choix-qcm" name="choix1">
-                post
-            </button> <br>
-            <button class="choix-qcm" name="choix2">
-                get
-            </button> <br>
-            <button class="choix-qcm" name="choix3">
-                delete
-            </button> <br>
-            <button class="choix-qcm" name="choix4">
-                remove
-            </button> <br>
 
-            <button class="validation-reponse">
-                Valider
-            </button>
+        <div class="bloc-question">
+            <div class="question">
+                <b>QCM</b><br />
+                Parmi les proposition suivantes, laquelle n'est pas un verbe http ?
+            </div>
+            <div class="reponse">
+                <button class="choix-qcm" name="choix1">
+                    post
+                </button> <br>
+                <button class="choix-qcm" name="choix2">
+                    get
+                </button> <br>
+                <button class="choix-qcm" name="choix3">
+                    delete
+                </button> <br>
+                <button class="choix-qcm" name="choix4">
+                    remove
+                </button> <br>
+
+                <button class="validation-reponse">
+                    Valider
+                </button>
+            </div>
         </div>
 
         <!-- if Chercher Erreur -->
 
-        <div class="question">
-            <b>Chercher l'erreur</b><br />
-            Parmi les proposition suivantes, laquelle est fausse ?
-        </div>
-        <div class="reponses">
-            <div class="choix-erreur" name="choix1">
-                <p>Je m'appelle Charles Néros</p>
-            </div> <br>
-            <div class="choix-erreur" name="choix2">
-                <p>Je m'appelle Charles Nérot</p>
-            </div> <br>
-            <div class="choix-erreur" name="choix3">
-                <p>Je m'appelle Charle Nérot</p>
-            </div> <br>
-            <div class="choix-erreur" name="choix4">
-                <p>Je m'appelle Charles Néro</p>
-            </div> <br>
+        <div class="bloc-question">
+            <div class="question">
+                <b>Chercher l'erreur</b><br />
+                Parmi les proposition suivantes, laquelle est fausse ?
+            </div>
+            <div class="reponse">
+                <div class="choix-erreur" name="choix1">
+                    <p>Je m'appelle Charles Néros</p>
+                </div> <br>
+                <div class="choix-erreur" name="choix2">
+                    <p>Je m'appelle Charles Nérot</p>
+                </div> <br>
+                <div class="choix-erreur" name="choix3">
+                    <p>Je m'appelle Charle Nérot</p>
+                </div> <br>
+                <div class="choix-erreur" name="choix4">
+                    <p>Je m'appelle Charles Néro</p>
+                </div> <br>
 
-            <button class="validation-reponse">
-                Valider
-            </button>
+                <button class="validation-reponse">
+                    Valider
+                </button>
+            </div>
         </div>
 
         <!-- if Réponse à valeur numérique -->
-
+        <div class="bloc-question">
+            <div class="question">
+                <b>Quel sera le résultat ?</b><br />
+                <pre> echo 1+1; </pre>
+            </div>
+            <div class="reponse">
+                <input type="text" placeholder="11"><br>
+                <button class="validation-reponse">
+                    Valider
+                </button>
+            </div>
+        </div>
 
         <!-- if Vrai ou faux -->
+        <div class="bloc-question">
+            <div class="question">
+                <b>Vrai ou faux ?</b><br />
+            </div>
+            <div class="reponse">
+                <div class="reponse">
+                    <button class="choix-qcm" name="vrai">
+                        Vrai
+                    </button> <br>
+                    <button class="choix-qcm" name="faux">
+                        Faux
+                    </button> <br>
+
+                    <button class="validation-reponse">
+                        Valider
+                    </button>
+                </div>
+            </div>
+        </div>
+
     {% endblock %}
+    {% block footer %}{% endblock %}
 
 

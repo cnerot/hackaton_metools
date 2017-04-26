@@ -10,6 +10,7 @@
 </head>
 <body>
 
+{% block menu %}
 <div class="menu">
     <div class="menu-item first logo">
         <a href="{{ path('homepage') }}"><img src="{{ asset('img/logo.png') }}" /></a>
@@ -35,11 +36,14 @@
         </span>
     </div>
 </div>
+{% endblock %}
 
 {% block body %}{% endblock %}
+{% block footer %}
 <div class="footer">
     Ceci est le footer
 </div>
+{% endblock %}
 {% block javascripts %}{% endblock %}
 </body>
 </html>
