@@ -1,105 +1,123 @@
 {% extends 'front.html.twig' %}
     {% block header %} {% endblock %}
-    {% block front %}
-        <div class="progression-jeu">
-            <div class="pourcentage">
-                Progression : x%
-            </div>
-            <div class="etape-jeu">
-                Question x
+    {% block menu %}{% endblock %}
+    {% block footer %}{% endblock %}
+    {% block body %}
+        <div class="col-lg-12" id="bloc-jeu">
+            <div class="row">
+                <div class="col-lg-2 col-lg-offset-5 progression-jeu">
+                    <div class="pourcentage">
+                        <span class="orange">Progression : x%</span>
+                    </div>
+                    <div class="etape-jeu">
+                        <b>Question x</b>
+                    </div>
+
+                </div>
             </div>
             <hr>
-        </div>
-        <!-- if QCM -->
-
-        <div class="bloc-question">
-            <div class="question">
-                <b>QCM</b><br />
-                Parmi les proposition suivantes, laquelle n'est pas un verbe http ?
+            <!-- if QCM -->
+            <div class="row">
+                <div class="col-lg-offset-3 question">
+                    <b>QCM</b><br />
+                    Parmi les proposition suivantes, <span class="orange">laquelle n'est pas un verbe http ?</span>
+                </div>
             </div>
-            <div class="reponse">
-                <button class="choix-qcm" name="choix1">
-                    post
-                </button> <br>
-                <button class="choix-qcm" name="choix2">
-                    get
-                </button> <br>
-                <button class="choix-qcm" name="choix3">
-                    delete
-                </button> <br>
-                <button class="choix-qcm" name="choix4">
-                    remove
-                </button> <br>
-
-                <button class="validation-reponse">
+            <div class="row">
+                    <div class="col-lg-offset-5 reponse">
+                        <button class="choix-qcm" name="choix1">
+                            post
+                        </button> <br>
+                        <button class="choix-qcm" name="choix2">
+                            get
+                        </button> <br>
+                        <button class="choix-qcm" name="choix3">
+                            delete
+                        </button> <br>
+                        <button class="choix-qcm" name="choix4">
+                            remove
+                        </button> <br>
+                    </div>
+            </div>
+            <div class="row">
+                <button class="col-lg-offset-7 validation-reponse">
                     Valider
                 </button>
             </div>
-        </div>
 
-        <!-- if Chercher Erreur -->
+            <!-- if Chercher Erreur -->
 
-        <div class="bloc-question">
-            <div class="question">
-                <b>Chercher l'erreur</b><br />
-                Parmi les proposition suivantes, laquelle est fausse ?
+            <div class="row">
+                <div class="col-lg-offset-3 question">
+                    <b>Chercher l'erreur</b><br />
+                    Parmi les lignes suivantes, laquelle est fausse ?
+                </div>
             </div>
-            <div class="reponse">
-                <div class="choix-erreur" name="choix1">
-                    <p>Je m'appelle Charles Néros</p>
-                </div> <br>
-                <div class="choix-erreur" name="choix2">
-                    <p>Je m'appelle Charles Nérot</p>
-                </div> <br>
-                <div class="choix-erreur" name="choix3">
-                    <p>Je m'appelle Charle Nérot</p>
-                </div> <br>
-                <div class="choix-erreur" name="choix4">
-                    <p>Je m'appelle Charles Néro</p>
-                </div> <br>
-
-                <button class="validation-reponse">
+            <div class="row">
+                <div class="col-lg-offset-5 reponse">
+                    <pre>
+                        <span class="choix-erreur" name="choix2"> Je suis faux </span>
+                        Je m'appelle Charles Néros
+                    </pre>
+                     <br>
+                    <div class="choix-erreur" name="choix2">
+                        <p>Je m'appelle Charles Nérot</p>
+                    </div> <br>
+                    <div class="choix-erreur" name="choix3">
+                        <p>Je m'appelle Charle Nérot</p>
+                    </div> <br>
+                    <div class="choix-erreur" name="choix4">
+                        <p>Je m'appelle Charles Néro</p>
+                    </div> <br>
+                </div>
+            </div>
+            <div class="row">
+                <button class="col-lg-offset-7 validation-reponse">
                     Valider
                 </button>
             </div>
-        </div>
 
-        <!-- if Réponse à valeur numérique -->
-        <div class="bloc-question">
-            <div class="question">
-                <b>Quel sera le résultat ?</b><br />
-                <pre> echo 1+1; </pre>
+            <!-- if Réponse à valeur numérique -->
+            <div class="row">
+                <div class="col-lg-offset-3 col-lg-4 question">
+                    <b>Quel sera le résultat ?</b><br />
+                    <pre> echo 1+1; </pre>
+                </div>
             </div>
-            <div class="reponse">
-                <input type="text" placeholder="11"><br>
-                <button class="validation-reponse">
+            <div class="row">
+                <div class="col-lg-offset-5 reponse">
+                    <input type="text" placeholder="11"><br>
+                </div>
+            </div>
+            <div class="row">
+                <button class="col-lg-offset-7 validation-reponse">
                     Valider
                 </button>
             </div>
-        </div>
 
-        <!-- if Vrai ou faux -->
-        <div class="bloc-question">
-            <div class="question">
-                <b>Vrai ou faux ?</b><br />
+            <!-- if Vrai ou faux -->
+            <div class="row">
+                <div class="col-lg-offset-3 question">
+                    <b>Vrai ou faux ?</b><br />
+                    L'eau ne permet pas de s'hydrater
+                </div>
             </div>
-            <div class="reponse">
-                <div class="reponse">
+            <div class="row">
+                <div class="col-lg-offset-5 reponse">
                     <button class="choix-qcm" name="vrai">
                         Vrai
                     </button> <br>
                     <button class="choix-qcm" name="faux">
                         Faux
                     </button> <br>
-
-                    <button class="validation-reponse">
-                        Valider
-                    </button>
                 </div>
             </div>
+            <div class="row">
+                <button class="col-lg-offset-7 validation-reponse">
+                    Valider
+                </button>
+            </div>
         </div>
-
     {% endblock %}
-    {% block footer %}{% endblock %}
 
 
