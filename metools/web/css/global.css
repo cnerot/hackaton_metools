@@ -156,8 +156,12 @@ body{
 .orange {
     color: #FFA155;
 }
-.choix-erreur p:hover{
+
+.reponse code{
+    color: black;
+}
+
+.reponse code:hover{
     cursor: pointer;
     color:#FFA155;
 }
-

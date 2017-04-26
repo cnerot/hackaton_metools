@@ -10,11 +10,16 @@
 </head>
 <body>
 
-{% block menu %}
+
 <div class="menu">
     <div class="menu-item first logo">
-        <a href="{{ path('homepage') }}"><img src="{{ asset('img/logo.png') }}" /></a>
+        {% if app.request.get('_route') == 'game' %}
+            <img src="{{ asset('img/logo.png') }}" />
+        {% else %}
+            <a href="{{ path('homepage') }}"><img src="{{ asset('img/logo.png') }}" /></a>
+        {% endif %}
     </div>
+    {% if app.request.get('_route') != 'game' %}
     <div class="menu-item">
         <span>
             <a href="{{ path('game') }}">Jouer</a>
@@ -35,8 +40,9 @@
             <a href="{{ path('homepage') }}">Déconnexion</a>
         </span>
     </div>
+    {% endif %}
 </div>
-{% endblock %}
+
 {% block body %}{% endblock %}
 {% block footer %}
 <div class="footer">
