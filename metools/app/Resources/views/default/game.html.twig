@@ -1,5 +1,68 @@
 {% extends 'front.html.twig' %}
-    {% block header_img %} {{  asset('img/playgame.png') }} {% endblock %}
-    {% block header_img_url %} {{ 'http://www.gfi.world/fr/' }} {% endblock %}
+    {% block header %} {% endblock %}
+    {% block body %}
+        <div class="progression-jeu">
+            <div class="pourcentage">
+                Progression : x%
+            </div>
+            <div class="etape-jeu">
+                Question x
+            </div>
+            <hr>
+        </div>
+        <!-- if QCM -->
+        <div class="question">
+            <b>QCM</b><br />
+            Parmi les proposition suivantes, laquelle n'est pas un verbe http ?
+        </div>
+        <div class="reponses">
+            <button class="choix-qcm" name="choix1">
+                post
+            </button> <br>
+            <button class="choix-qcm" name="choix2">
+                get
+            </button> <br>
+            <button class="choix-qcm" name="choix3">
+                delete
+            </button> <br>
+            <button class="choix-qcm" name="choix4">
+                remove
+            </button> <br>
+
+            <button class="validation-reponse">
+                Valider
+            </button>
+        </div>
+
+        <!-- if Chercher Erreur -->
+
+        <div class="question">
+            <b>Chercher l'erreur</b><br />
+            Parmi les proposition suivantes, laquelle est fausse ?
+        </div>
+        <div class="reponses">
+            <div class="choix-erreur" name="choix1">
+                <p>Je m'appelle Charles Néros</p>
+            </div> <br>
+            <div class="choix-erreur" name="choix2">
+                <p>Je m'appelle Charles Nérot</p>
+            </div> <br>
+            <div class="choix-erreur" name="choix3">
+                <p>Je m'appelle Charle Nérot</p>
+            </div> <br>
+            <div class="choix-erreur" name="choix4">
+                <p>Je m'appelle Charles Néro</p>
+            </div> <br>
+
+            <button class="validation-reponse">
+                Valider
+            </button>
+        </div>
+
+        <!-- if Réponse à valeur numérique -->
+
+
+        <!-- if Vrai ou faux -->
+    {% endblock %}
 
 
