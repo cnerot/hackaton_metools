@@ -1,43 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    {% block stylesheets %}{% endblock %}
-    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-</head>
-<body>
-
-<div class="menu">
-    <div class="menu-item first logo">
-        <img src="{{ asset('img/logo.png') }}" />
-    </div>
-    <div class="menu-item">
-                <span>
-                    <a href="#">Accueil</a>
-                </span>
-    </div>
-    <div class="menu-item">
-                <span>
-                    <a href="#">Contenus</a>
-                </span>
-    </div>
-    <div class="menu-item">
-                    <span>
-                        <a class="" href="#">Salons</a>
-                    </span>
-    </div>
-    <div class="menu-item last logo">
-        <img src="{{ asset('img/logo_gfi.png') }}" />
-    </div>
-</div>
-
-{% block body %}{% endblock %}
-<div class="footer">
-    Ceci est le footer
-</div>
-{% block javascripts %}{% endblock %}
-</body>
-</html>
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+{% block header %}
+    {{ parent() }}
+    <nav class="admin_menu">
+        <ul>
+            <li><a href="#">test</a></li>
+            <li><a href="#">test</a></li>
+            <li><a href="#">test</a></li>
+            <li><a href="#">test</a></li>
+        </ul>
+    </nav>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/Chart.min.js') }}"></script>
+{% endblock %}
