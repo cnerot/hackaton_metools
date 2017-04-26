@@ -1,8 +1,14 @@
 /** GENERAL **/
 
-body
-{
+html{
+    position:relative;
+    min-height: 100%;
+}
+
+body{
     background-color: #DF4949;
+    margin-bottom: 100px;
+    overflow-x: hidden;
 }
 
 .menu {
@@ -10,28 +16,32 @@ body
     background-color: #EE8348;
     display: inline-block;
     vertical-align: bottom;
+    text-align: center;
 }
 .menu-item {
     display: inline-block;
     margin-left: 10px;
     padding: 10px;
+    margin-top: 35px;
 }
 
 .menu-item.first {
-    margin-left: 0px;
-}
-
-.menu-item.last{
-    float:right;
-    margin-right: 10px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 0px;
 }
 
 .menu-item.active {
     background-color: #70BEB1;
 }
 
-.menu-item span a{
+.menu-item a{
     color: white;
+}
+
+.menu-item a:hover, .menu-item a:focus{
+    color:black;
+    text-decoration: none;
 }
 
 .logo {
@@ -41,13 +51,24 @@ body
     width: 100px;
 }
 
+.header {
+    text-align: center;
+}
+
+.row{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.header-img {
+    max-height: 600px;
+}
 .footer {
     width: 100%;
     height: 100px;
     border: 1px solid grey;
+    position: absolute;
     text-align: center;
     vertical-align: middle;
-    position: fixed;
     bottom: 0;
     background-color: #E6C22D;
 }
@@ -60,12 +81,30 @@ body
 
 .header-content
 {
-    height: 400px;
+    min-height: 400px;
     background-color:#DF4949;
 }
 
 #profile
 {
-    height : 400px;
+    min-height : 400px;
     background-color: #EE8348;
+}
+
+#profile-card{
+    display: inline-flex;
+    width: 550px;
+    height: 302px;
+    border: solid 1px;
+}
+
+.profile-item, .profile-item img{
+    margin: 0;
+    height: 300px;
+    width: 275px;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
 }

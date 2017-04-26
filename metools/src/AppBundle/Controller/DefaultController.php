@@ -18,4 +18,37 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
         ]);
     }
+
+    /**
+     * @Route("/game", name="game")
+     */
+    public function gameAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/game.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+        ]);
+    }
+
+    /**
+     * @Route("/results", name="results")
+     */
+    public function resultsAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/results.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+        ]);
+    }
+
+    /**
+     * @Route("/evolution", name="evolution")
+     */
+    public function evolutionAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/evolution.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+        ]);
+    }
 }
