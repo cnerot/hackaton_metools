@@ -6,49 +6,51 @@ html{
 }
 
 body{
-    background-color: #DF4949;
+    background-color: #F6F6F6;
     margin-bottom: 100px;
     overflow-x: hidden;
 }
 
 .menu {
     width: 100%;
-    background-color: #EE8348;
     display: inline-block;
     vertical-align: bottom;
     text-align: center;
+    background-color: rgba(49, 55, 74, 0.8);
 }
 .menu-item {
     display: inline-block;
     margin-left: 10px;
     padding: 10px;
     margin-top: 35px;
+    opacity: 1;
 }
 
 .menu-item.first {
     float: left;
     margin-left: 10px;
     margin-top: 0px;
-}
-
-.menu-item.active {
-    background-color: #70BEB1;
+    opacity: 1;
 }
 
 .menu-item a{
     color: white;
+    opacity: 1;
 }
 
 .menu-item a:hover, .menu-item a:focus{
-    color:black;
+    color:blue;
     text-decoration: none;
+    opacity: 1;
 }
 
 .logo {
     padding-top: 10px;
+    opacity: 1;
 }
 .logo img{
     width: 100px;
+    opacity: 1;
 }
 
 .header {
@@ -70,7 +72,8 @@ body{
     text-align: center;
     vertical-align: middle;
     bottom: 0;
-    background-color: #E6C22D;
+    background-color: #31374A;
+    color: white;
 }
 
 .featured-item span{
@@ -82,13 +85,13 @@ body{
 .header-content
 {
     min-height: 400px;
-    background-color:#DF4949;
+    background-color:#F6F6F6;
 }
 
 #profile
 {
     min-height : 400px;
-    background-color: #EE8348;
+    background-color: #F6F6F6;
 }
 
 #profile-card{
@@ -107,4 +110,13 @@ body{
 .col-centered{
     float: none;
     margin: 0 auto;
+}
+
+
+
+/* Question */
+.choix-erreur p:hover{
+    cursor: pointer;
+
+
 }
