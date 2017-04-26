@@ -118,14 +118,43 @@ body{
 
 /* Question */
 
+
+.progression-jeu{
+    text-align: center;
+}
+#bloc-jeu{
+    background-color: #31374A;
+    color: #f6f6f6;
+}
+
+#bloc-jeu hr{
+    width: 50px;
+}
+
+#bloc-jeu input{
+    color: black;
+}
+.validation-reponse{
+    border: none;
+    background-color: #fd8224;
+    width: 200px;
+    height: 50px;
+}
 .choix-qcm{
     width: 300px;
+    height: 50px;
     border: none;
-    background-color: ;
+    border-bottom: solid 10px #0000ee;
+    margin-bottom: 10px;
+    background-color: #3E97FF;
 }
 
 .choix-erreur p{
     display: inline-block;
+}
+
+.orange {
+    color: #FFA155;
 }
 .choix-erreur p:hover{
     cursor: pointer;
