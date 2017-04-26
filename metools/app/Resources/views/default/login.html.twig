@@ -1,7 +1,36 @@
 {% extends 'front.html.twig' %}
+    {% block menu %} {% endblock %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/lucas.css') }}">
+    {% endblock %}
     {% block header_img %}{% endblock %}
     {% block header_img_url %}{% endblock %}
     {% block body %}
-        <!-- C ICI LE HTML LUCAS PUTAIN -->
 
+    <div id="left">
+        <img src="{{ asset('img/logo.png') }}" />
+    </div>
+
+    <div id="right">
+        <div id="right-content">
+            <img src="{{ asset('img/logo.png') }}"  id="logo_skillz_top"/>
+            <span><input type="submit" value="Connection" class="button_mode"></span>
+            <span><input type="submit" value="Inscription" class="button_mode"></span>
+            <form id="connection_form">
+                <label>IDENTIFIANT</label>
+                <br/>
+                <input type="text" name="_login" placeholder="MAIL OU NOM D'UTILISATEUR">
+                <br/>
+                <label>MOT DE PASSE</label>
+                <br/>
+                <input type="password" name="_password" PLACEHOLDER="N'OUBLIEZ PAS LES MAJUSCULES">
+                <br/>
+                <label id="password_forgot">Mot de passe oublié ?</label> <!--ITALIQUE !-->
+                <br/>
+                <input type="submit" value="Valider" id="validate_button">
+            </form>
+            <img src="{{ asset('img/logo_gfi.png') }}" id="logo_gfi_bottom" />
+        </div>
+    </div>
     {% endblock %}
+{% block footer %}{% endblock %}
