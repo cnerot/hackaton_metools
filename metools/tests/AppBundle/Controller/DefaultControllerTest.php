@@ -16,3 +16,7 @@ class DefaultControllerTest extends WebTestCase
         $this->assertContains('Welcome to Symfony', $crawler->filter('#container h1')->text());
     }
 }
+
+/*
+
+php bin/console generate:doctrine:entity --entity=AppBundle:Post --fields="login:string(length=100 nullable=true unique=false) password:string(length=100 nullable=true unique=false) name:string(length=100 nullable=true unique=false) surname:string(length=100 nullable=true unique=false) age:integer address:text"
