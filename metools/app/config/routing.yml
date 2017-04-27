@@ -19,3 +19,6 @@ admin_skill:
 admin_skillcreate:
   path:     /admin/skills/create
   defaults: { _controller: AppBundle:Admin:skillscreate }
+inscription:
+  path: /inscription
+  defaults: { _controller: AppBundle:Default:Inscription }
