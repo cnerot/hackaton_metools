@@ -1,7 +1,86 @@
 {% extends 'admin.html.twig' %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    <form method="POST" action="{{ url("admin_questioncreate") }}">
+        <label>Fonctionnel</label>
+        <select id="question_fonctionnal" name="func">
+            <option value="" disabled selected>Nan</option>
+            <option value="question_func">Oui</option>
+            <option value="question_n_func" selected>Non</option>
+        </select>
+        <div id="question_func">
+            <label>type</label>
+            <select id="question_type" name="question_type">
+                <option value="" disabled selected>Nan</option>
+                <option value="qcm">QCM</option>
+                <option value="error">Chercher l'erreur</option>
+                <option value="number">Resultat chiffré</option>
+                <option value="valid">Validation de code</option>
+            </select>
+            <div id="qcm">
+                <input type="text" name="qcm_1"><input type="checkbox" name="qcm_1_valid">
+                <input type="text" name="qcm_2"><input type="checkbox" name="qcm_2_valid">
+                <input type="text" name="qcm_3"><input type="checkbox" name="qcm_3_valid">
+                <input type="text" name="qcm_4"><input type="checkbox" name="qcm_4_valid">
+            </div>
+            <div id="error">
+                <textarea name="error"></textarea>
+                <input type="number">
+            </div>
+            <div id="number">
+                <input type="number" name="num_res">
+            </div>
+            <div id="valid">
+                <select name="truefalse">
+                    <option value="1">Oui</option>
+                    <option value="0" selected>Non</option>
+                </select>
+            </div>
+            <input type="text" name="content_large">
+        </div>
+        <div id="question_n_func">
+            <input type="text" name="content">
+            <label>type</label>
+            <select id="h_question_type" name="h_question_type">
+                <option value="" disabled selected>Nan</option>
+                <option value="range">Mood Select</option>
+                <option value="text">Text Entry</option>
+            </select>
+            <div id="range">
+                <input type="text" name="range_1">
+                <input type="text" name="range_2">
+            </div>
+            <div id="text"></div>
+        </div>
+        <input type="submit" value="Ajouter la Question">
+    </form>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            var divs = [
+                "question_fonctionnal",
+                "question_type",
+                "h_question_type"
+            ];
+            divs.forEach(function (div) {
+                $("#" + div).mouseup(function () {
+                    $('#' + div + " option").each(function () {
+                        if ($(this).val() != "") {
+                            $("#" + $(this).val()).hide();
+                        }
+                    });
+                    $("#" + $(this).val()).show();
+                });
+                $('#' + div + " option").each(function () {
+                    if ($(this).val() != "") {
+                        $("#" + $(this).val()).hide();
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}
