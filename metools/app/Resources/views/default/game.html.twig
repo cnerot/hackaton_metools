@@ -2,6 +2,10 @@
     {% block header %} {% endblock %}
     {% block footer %}{% endblock %}
     {% block body %}
+        {% if (success) %}
+            <p>success</p>
+        {% endif %}
+        <form method="POST" action="{{ url("game") }}">
         <div class="col-lg-12" id="bloc-jeu">
             <div class="row">
                 <div class="col-lg-2 col-lg-offset-5 progression-jeu">
@@ -11,103 +15,108 @@
                     <div class="etape-jeu">
                         <b>Question x</b>
                     </div>
-
                 </div>
             </div>
             <hr>
-            <!-- if QCM -->
-            <div class="row">
-                <div class="col-lg-offset-4 question">
-                    <b>QCM</b><br />
-                    Parmi les proposition suivantes, <span class="orange">laquelle n'est pas un verbe http ?</span>
-                </div>
-            </div>
-            <div class="row">
-                    <div class="col-lg-offset-5 reponse">
-                        <button class="choix-qcm" name="choix1">
-                            post
-                        </button> <br>
-                        <button class="choix-qcm" name="choix2">
-                            get
-                        </button> <br>
-                        <button class="choix-qcm" name="choix3">
-                            delete
-                        </button> <br>
-                        <button class="choix-qcm" name="choix4">
-                            remove
-                        </button> <br>
+            {% if (question.qcm == 1) %}
+                {% if (question.type == 0) %}
+                    <div class="row">
+                        <div class="col-lg-offset-4 question">
+                            <b>QCM</b><br/>
+                            {{ question.content }}
+                        </div>
                     </div>
-            </div>
-            <div class="row">
-                <button class="col-lg-offset-6 validation-reponse">
-                    Valider
-                </button>
-            </div>
+                    <div class="row">
+                        <div class="col-lg-offset-5 reponse">
+                            {% for q_data in question_data %}
+                                <label class="choix-qcm">{{ q_data.awnser }}</label><input type="checkbox" name="qcm"value="{{ q_data.id }}">
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input type="submit" class="col-lg-offset-6 validation-reponse" value="Valider">
+                    </div>
 
+                {% endif %}
+                {% if (question.type == 1) %}
+                    <div class="row">
+                        <div class="col-lg-offset-4 question">
+                            <b>Chercher l'erreur</b><br/>
+                            {{ question.content }}
+                        </div>
+                    </div>
+                    {% set code = question.code|split('\n') %}
+                    <input type="hidden" name="question" value="{{ question.id }}">
+                    <div class="row">
+                        <div class="col-lg-offset-5 col-lg-4 reponse">
+                        {% set cpt = 0 %}
+                            {% for ligne in code %}
+                            <a><pre>{{ ligne }}</pre></a><input type="radio" name="ligne" value="{{ cpt }}">
+                            {% set cpt = cpt + 1 %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input type="submit" class="col-lg-offset-6 validation-reponse" value="Valider">
+                    </div>
+
+                {% endif %}
+                {% if (question.type == 2) %}
+                    <!-- if Vrai ou faux -->
+                    <div class="row">
+                        <div class="col-lg-offset-4 question">
+                            <b>Vrai ou faux ?</b><br/>
+                            {{ question.content }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-offset-5 reponse">
+                            <button class="choix-qcm" name="vrai">
+                                Vrai
+                            </button>
+                            <input type="radio" name="truefalse" value="1">
+                            <br>
+                            <button class="choix-qcm" name="faux">
+                                Faux
+                            </button>
+                            <input type="radio" name="truefalse" value="0">
+                            <br>
+                        </div>
+                    </div>
+                    <input type="hidden" name="question" value="{{ question.id }}">
+                    <div class="row">
+                        <input type="submit" class="col-lg-offset-6 validation-reponse" value="Valider">
+                    </div>
+                {% endif %}
+                {% if (question.type == 3) %}
+                    <!-- if Réponse à valeur numérique -->
+                    <div class="row">
+                        <div class="col-lg-offset-4 col-lg-4 question">
+                            <b>{{ question.content }}</b><br/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-offset-5 reponse">
+                            <label> Réponse </label><br>
+                            <input type="text" name="q_anwser" placeholder="Valuer Numerique"><br>
+                        </div>
+                    </div>
+                    <input type="hidden" name="question" value="{{ question.id }}">
+                    <div class="row">
+                        <input type="submit" class="col-lg-offset-6 validation-reponse" value="Valider">
+
+                    </div>
+                {% endif %}
+            {% else %}
+                {% if (question.type == 0) %}
+
+                {% endif %}
+                {% if (question.type == 1) %}
+                {% endif %}
+            {% endif %}
             <!-- if Chercher Erreur -->
-
-            <div class="row">
-                <div class="col-lg-offset-4 question">
-                    <b>Chercher l'erreur</b><br />
-                    Parmi les lignes suivantes, laquelle est fausse ?
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-offset-5 col-lg-4 reponse">
-<pre><code class="choix-erreur" name="choix2">Je suis faux </code>
-<code class="choix-erreur" name="choix2">Je ne suis pas faux </code>
-<code class="choix-erreur" name="choix2">Je suis quelqu'un </code>
-<code class="choix-erreur" name="choix2">Je suis vrai </code></pre>
-                </div>
-            </div>
-            <div class="row">
-                <button class="col-lg-offset-6 validation-reponse">
-                    Valider
-                </button>
-            </div>
-
-            <!-- if Réponse à valeur numérique -->
-            <div class="row">
-                <div class="col-lg-offset-4 col-lg-4 question">
-                    <b>Quel sera le résultat ?</b><br />
-                    <pre> echo 1+1; </pre>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-offset-5 reponse">
-                    <label> Réponse </label><br>
-                    <input type="text" placeholder="11"><br>
-                </div>
-            </div>
-            <div class="row">
-                <button class="col-lg-offset-6 validation-reponse">
-                    Valider
-                </button>
-            </div>
-
-            <!-- if Vrai ou faux -->
-            <div class="row">
-                <div class="col-lg-offset-4 question">
-                    <b>Vrai ou faux ?</b><br />
-                    L'eau ne permet pas de s'hydrater
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-offset-5 reponse">
-                    <button class="choix-qcm" name="vrai">
-                        Vrai
-                    </button> <br>
-                    <button class="choix-qcm" name="faux">
-                        Faux
-                    </button> <br>
-                </div>
-            </div>
-            <div class="row">
-                <button class="col-lg-offset-6 validation-reponse">
-                    Valider
-                </button>
-            </div>
         </div>
+        </form>
     {% endblock %}
 
 
