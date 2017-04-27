@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700" rel="stylesheet">
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
 
-{% block menu %}
+
 <div class="menu">
     <div class="menu-item first logo">
-        <a href="{{ path('homepage') }}"><img src="{{ asset('img/logo.png') }}" /></a>
+        {% if app.request.get('_route') == 'game' %}
+            <a href="{{ path('homepage') }}"><img src="{{ asset('img/gfi-logo3.png') }}" /></a>
+        {% else %}
+            <a href="{{ path('homepage') }}"><img src="{{ asset('img/gfi-logo3.png') }}" /></a>
+        {% endif %}
     </div>
+    {% if app.request.get('_route') != 'game' %}
     <div class="menu-item">
         <span>
             <a href="{{ path('game') }}">Jouer</a>
@@ -35,13 +42,13 @@
             <a href="{{ path('homepage') }}">Déconnexion</a>
         </span>
     </div>
+    {% endif %}
 </div>
-{% endblock %}
 
 {% block body %}{% endblock %}
 {% block footer %}
 <div class="footer">
-    Ceci est le footer
+
 </div>
 {% endblock %}
 {% block javascripts %}{% endblock %}
