@@ -125,9 +125,37 @@ class AdminController extends Controller
     }
     public function questionAction(Request $request)
     {
+        $questions = $this->getDoctrine()
+            ->getRepository('AppBundle:questions')
+            ->findAll();
+
+        $q_skills[] = array();
+        foreach ($questions as $q){
+            $q_skills[$q->getId()] = $this->getDoctrine()
+                ->getRepository('AppBundle:questionskill')
+                ->findBy(["questionId" => $q->getId()]);
+        }
+        $question_skills[] = array();
+        foreach ($q_skills as $k=>$s){
+            $temp = array();
+            foreach ($s as $skill){
+                $temp[] = $this->getDoctrine()
+                    ->getRepository('AppBundle:skill')
+                    ->findOneBy(["id" => $skill->getSkillId()]);
+            }
+            $question_skills[$k] = $temp;
+        }
+
+
+        $skills = $this->getDoctrine()
+            ->getRepository('AppBundle:skill')
+            ->findAll();
         // replace this example code with whatever you need
         return $this->render('admin/question.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
+            'questions' => $questions,
+            'skills' => $skills,
+            'qskills' => $question_skills,
         ]);
     }
 }

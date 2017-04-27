@@ -1,40 +1,46 @@
 {% extends 'admin.html.twig' %}
 
 {% block body %}
-    <div class="new_question">
-        <h2>New Question</h2>
-        <label>humaine ou fonctionnel</label>
-        <select>
-            <option>functionnal</option>
-            <option>Humain</option>
-        </select>
-        <select>
-            <option>QCM</option>
-            <option>Trouver l'erreur</option>
-            <option>Verification de code</option>
-            <option>Reponse Textuel</option>
-        </select>
-        <input type="text" placeholder="question content">
-        <div class="qcm_data">
-            {% for i in 1..4 %}
-                <input type="text" placeholder="reponse n°{{ i }} (QCM)" class="reponse reponse{{ i }}"><input type="checkbox"><span>select if true</span>
-            {% endfor %}
-        </div>
-        <div class="error_data">
-            <textarea>enter code here</textarea>
-        </div>
-        <div class="verification_data">
-            <textarea>enter code here</textarea>
-        </div>
-        {% for i in 0..10 %}
-            <input type="checkbox"> <span>skill n°{{ i }}</span>
-        {% endfor %}
-    </div>
     <div class="old_questions">
-        {% for i in 0..10 %}
+        {% for question in questions %}
             <div class="old_question">
-                <h4>Question</h4>
+                <h4> {% if (question.qcm == 1) %}
+                    Question Fonctionnel
+                    {% if (question.type ==0) %}
+                       - QCM -
+                    {% endif %}
+                    {% if (question.type ==1) %}
+                        - Checher l'erreur -
+                    {% endif %}
+                    {% if (question.type ==2) %}
+                        - Resutat chiffré -
+                    {% endif %}
+                    {% if (question.type ==3) %}
+                         - Vrai/faux -
+                    {% endif %}
+                {% else %}
+                    Question Humaine
+                {% endif %}
+
+                {{ question.content }}</h4>
             </div>
+
+            <span>Competences</span>
+            {% for skill in qskills[question.id] %}
+                <p>skill</p>
+            {% endfor %}
+            <span>Ajouter une competence</span>
+            <form>
+                <input type="hidden" value="{{ question.id }}">
+                <select>
+                    <option disabled selected>Nan</option>
+
+                    {% for skill in skills %}
+                        <option>{{ skill.name }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Ajouter la competence">
+            </form>
         {% endfor %}
     </div>
 {% endblock %}
