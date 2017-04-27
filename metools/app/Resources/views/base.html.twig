@@ -13,37 +13,39 @@
 <body>
 
 
-<div class="menu">
-    <div class="menu-item first logo">
-        {% if app.request.get('_route') == 'game' %}
-            <a href="{{ path('homepage') }}"><img src="{{ asset('img/gfi-logo3.png') }}" /></a>
-        {% else %}
-            <a href="{{ path('homepage') }}"><img src="{{ asset('img/gfi-logo3.png') }}" /></a>
+{% if app.request.get('_route') != 'login' %}
+    <div class="menu">
+        <div class="menu-item first logo">
+            {% if app.request.get('_route') == 'game' %}
+                <a href="{{ path('homepage') }}"><img src="{{ asset('img/gfi-logo3.png') }}" /></a>
+            {% else %}
+                <a href="{{ path('homepage') }}"><img src="{{ asset('img/gfi-logo3.png') }}" /></a>
+            {% endif %}
+        </div>
+        {% if app.request.get('_route') != 'game' %}
+        <div class="menu-item">
+            <span>
+                <a href="{{ path('game') }}">Jouer</a>
+            </span>
+                </div>
+                <div class="menu-item">
+            <span>
+                <a href="{{ path('homepage') }}">Profil</a>
+            </span>
+                </div>
+                <div class="menu-item">
+            <span>
+                <a href="{{ path('evolution') }}">Evolution</a>
+            </span>
+                </div>
+                <div class="menu-item">
+            <span>
+                <a href="{{ path('homepage') }}">Déconnexion</a>
+            </span>
+        </div>
         {% endif %}
     </div>
-    {% if app.request.get('_route') != 'game' %}
-    <div class="menu-item">
-        <span>
-            <a href="{{ path('game') }}">Jouer</a>
-        </span>
-    </div>
-    <div class="menu-item">
-        <span>
-            <a href="{{ path('homepage') }}">Profil</a>
-        </span>
-    </div>
-    <div class="menu-item">
-        <span>
-            <a href="{{ path('evolution') }}">Evolution</a>
-        </span>
-    </div>
-    <div class="menu-item">
-        <span>
-            <a href="{{ path('homepage') }}">Déconnexion</a>
-        </span>
-    </div>
-    {% endif %}
-</div>
+{% endif %}
 
 {% block body %}{% endblock %}
 {% block footer %}
