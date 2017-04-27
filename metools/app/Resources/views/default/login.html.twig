@@ -13,7 +13,7 @@
 
     <div id="right">
         <div id="right-content">
-            <img src="{{ asset('img/logo.png') }}"  id="logo_skillz_top"/>
+            <img src="{{ asset('img/LOGO/gfi-logo3.png') }}"  id="logo_skillz_top"/>
             <span><input type="submit" value="Connection" class="button_mode"></span>
             <span><input type="submit" value="Inscription" class="button_mode"></span>
             <form id="connection_form">
@@ -23,11 +23,11 @@
                 <br/>
                 <label>MOT DE PASSE</label>
                 <br/>
-                <input type="password" name="_password" PLACEHOLDER="N'OUBLIEZ PAS LES MAJUSCULES">
+                <input type="password" name="_password" PLACEHOLDER="N'OUBLIEZ PAS LES MAJUSCULES" id="input_mdp">
                 <br/>
-                <label id="password_forgot">Mot de passe oublié ?</label> <!--ITALIQUE !-->
+                <a id="password_forgot"  href="game">Mot de passe oublié ?</a> <!--ITALIQUE !-->
                 <br/>
-                <input type="submit" value="Valider" id="validate_button">
+                <input type="submit" value="Valider" id="validate_button" >
             </form>
             <img src="{{ asset('img/logo_gfi.png') }}" id="logo_gfi_bottom" />
         </div>
