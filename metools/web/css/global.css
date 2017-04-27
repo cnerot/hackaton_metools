@@ -9,14 +9,20 @@ body{
     background-color: #F6F6F6;
     margin-bottom: 100px;
     overflow-x: hidden;
+    font-family: 'Open Sans', sans-serif;
 }
 
+button{
+    font-family: 'Merriweather', serif;
+    text-transform: uppercase;
+}
 .menu {
     width: 100%;
     display: inline-block;
     vertical-align: bottom;
+    background-color: rgba(49, 55, 74, 1);
+    height: 120px;
     text-align: center;
-    background-color: rgba(49, 55, 74, 0.8);
 }
 .menu-item {
     display: inline-block;
@@ -27,10 +33,12 @@ body{
 }
 
 .menu-item.first {
-    float: left;
-    margin-left: 10px;
-    margin-top: 0px;
+    position: absolute;
+    left: 0;
+    margin-top: 25px;
     opacity: 1;
+
+
 }
 
 .menu-item a{
@@ -39,8 +47,8 @@ body{
 }
 
 .menu-item a:hover, .menu-item a:focus{
-    color:blue;
     text-decoration: none;
+
     opacity: 1;
 }
 
@@ -73,6 +81,7 @@ body{
     bottom: 0;
     background-color: #31374A;
     color: white;
+    border-top: solid 10px #FFA155;
 }
 
 .featured-item span{
@@ -90,23 +99,41 @@ body{
     background-color:#F6F6F6;
 }
 
-#profile
-{
-    min-height : 400px;
-    background-color: #F6F6F6;
-}
-
 #profile-card{
     display: inline-flex;
     width: 550px;
-    height: 302px;
-    border: solid 1px;
+    height: 304px;
+    border: solid 2px #C0C0C0;
 }
 
-.profile-item, .profile-item img{
+#profile-avatar{
+    background-color: white;
+}
+#profile-title{
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #31374A;
+}
+.profile-item{
     margin: 0;
     height: 300px;
     width: 275px;
+}
+
+.profile-item img{
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.skill-item{
+    width: 275px;
+    height: 304px;
+    border: solid 2px #C0C0C0;
+    background-color: white;
 }
 
 .col-centered{
@@ -114,7 +141,42 @@ body{
     margin: 0 auto;
 }
 
+/* Accueil */
 
+#lancer-jeu{
+    text-transform: uppercase;
+    background-color: #31374A;
+    color: white;
+    margin-top: 0;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    height: 300px;
+}
+
+#lancer-jeu div{
+    margin-top: 70px;
+    font-size: 0.8em;
+}
+
+#lancer-jeu b{
+    font-size: 1.8em;
+}
+#lancer-jeu button{
+    margin-top: 10px;
+    border: none;
+    background-color: #fd8224;
+    width: 270px;
+    height: 70px;
+    color: white;
+    font-size: 3em;
+    font-weight: 600;
+    -webkit-box-shadow: 0px 0px 45px 1px rgba(0,0,0,0.63);
+    -moz-box-shadow: 0px 0px 45px 1px rgba(0,0,0,0.63);
+    box-shadow: 0px 0px 45px 1px rgba(0,0,0,0.63);
+}
+#lancer-jeu button:hover{
+    background-color: #DF6002;
+}
 
 /* Question */
 
@@ -137,16 +199,30 @@ body{
 .validation-reponse{
     border: none;
     background-color: #fd8224;
-    width: 200px;
+    width: 180px;
     height: 50px;
+    font-size: 1.7em;
+    font-weight: 600;
+    -webkit-box-shadow: 0px 0px 45px 1px rgba(0,0,0,0.63);
+    -moz-box-shadow: 0px 0px 45px 1px rgba(0,0,0,0.63);
+    box-shadow: 0px 0px 45px 1px rgba(0,0,0,0.63);
+}
+
+.validation-reponse:hover{
+    background-color: #DF6002;
 }
 .choix-qcm{
     width: 300px;
     height: 50px;
     border: none;
-    border-bottom: solid 10px #0000ee;
+    border-bottom: solid 10px #4298BA;
     margin-bottom: 10px;
-    background-color: #3E97FF;
+    background-color: #7ED4F6;
+}
+
+.choix-qcm:hover{
+    background-color: #32BDF1;
+    border-color: #2B6479;
 }
 
 .choix-erreur p{
@@ -165,3 +241,5 @@ body{
     cursor: pointer;
     color:#FFA155;
 }
+
+

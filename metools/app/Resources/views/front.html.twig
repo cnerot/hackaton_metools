@@ -1,13 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div class="container-fluid bloc-front">
-        {% block header %}
-            <div class="row">
-                <div class="header col-lg-12">
-                    <a href="{% block header_img_url %} {{ path('homepage') }} {% endblock %}"><img class="header-img" src="{% block header_img %} {{ asset('img/placeholder.jpg') }}{% endblock %}"/></a>
-                </div>
-            </div>
-        {% endblock %}
         {% block front %}
         {% endblock %}
     </div>
