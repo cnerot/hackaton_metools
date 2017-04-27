@@ -13,7 +13,7 @@
 <body>
 
 
-{% if app.request.get('_route') != 'login' %}
+{% if app.request.get('_route') != 'login' and app.request.get('_route') != 'inscription'   %}
     <div class="menu">
         <div class="menu-item first logo">
             {% if app.request.get('_route') == 'game' %}
@@ -50,7 +50,29 @@
 {% block body %}{% endblock %}
 {% block footer %}
 <div class="footer">
-
+    <div class="row">
+        <div class="col-lg-2">
+            <img src="{{ asset('img/gfi-transparent.png') }}">
+            <div id="copyright">
+                2017 GFI Informatique<br>
+                Tous droits réservés
+            </div>
+        </div>
+        <div class="col-lg-offset-1 col-lg-2 menu-footer">
+            <span class="orange">Découvrir GFI</span><br><br>
+            Accueil<br>
+            Offres<br>
+            Innovations<br>
+            Actualités<br>
+        </div>
+        <div class="col-lg-offset-1 col-lg-2 menu-footer">
+            <span class="orange">Groupe</span><br><br>
+            Carrière<br>
+            Finance<br>
+            Presse<br>
+            Intranet<br>
+        </div>
+    </div>
 </div>
 {% endblock %}
 {% block javascripts %}{% endblock %}
