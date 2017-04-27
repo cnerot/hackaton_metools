@@ -1,36 +1,12 @@
 {% extends 'admin.html.twig' %}
 
 {% block body %}
-    <input type="text" placeholder="recchercher un profile">
-    <input type="submit" value="Valider">
-
-
-    <div class="filtres">
-        <div class="filtre">
-            {% for i in 0..10 %}
-                <span class="filtre_label">Filtre 1 <input type="checkbox"></span>
-            {% endfor %}
-        </div>
-    </div>
-
-    <div class="profiles">
-        {% for i in 0..10 %}
-            <div class="profile">
-                <img src="{# add placehoder url here #}">
-                <h3>nom prenom</h3>
-                <div class="questions">
-                    {% for j in 1..3 %}
-                    <div class="question">
-                        <h4>Question  n°{{ j }}</h4>
-                        <p>reponse</p>
-                    </div>
-                    {% endfor %}
-                </div>
-                {% for j in 1..3 %}
-                    <div class="competence">
-                        <h4>Competence {{ j }}</h4>
-                    </div>
-                {% endfor %}
+    <div class="skills">
+        {% for skill in skills %}
+            <div class="skill">
+                <h3>{{ skill.name }}</h3>
+                <p>{{ skill.code }}</p>
+                {{ skill.category }}
             </div>
         {% endfor %}
     </div>

@@ -26,6 +26,14 @@ class questions
      * @var string
      */
     private $content;
+    /**
+     * @var int
+     */
+    private $validline;
+    /**
+     * @var string
+     */
+    private $code;
 
 
     /**
@@ -109,5 +117,38 @@ class questions
     {
         return $this->content;
     }
+
+    /**
+     * @return int
+     */
+    public function getValidline()
+    {
+        return $this->validline;
+    }
+
+    /**
+     * @param int $validline
+     */
+    public function setValidline($validline)
+    {
+        $this->validline = $validline;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
 }
 

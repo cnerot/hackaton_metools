@@ -16,3 +16,6 @@ admin_questioncreate:
 admin_skill:
   path:     /admin/skills
   defaults: { _controller: AppBundle:Admin:skills }
+admin_skillcreate:
+  path:     /admin/skills/create
+  defaults: { _controller: AppBundle:Admin:skillscreate }
