@@ -22,6 +22,11 @@ class qcm_entries
      */
     private $awnser;
 
+    /**
+     * @var bool
+     */
+    private $correct;
+
 
     /**
      * Get id
@@ -80,5 +85,23 @@ class qcm_entries
     {
         return $this->awnser;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isCorrect()
+    {
+        return $this->correct;
+    }
+
+    /**
+     * @param boolean $correct
+     */
+    public function setCorrect($correct)
+    {
+        $this->correct = $correct;
+    }
+
+
 }
 

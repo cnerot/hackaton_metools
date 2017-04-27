@@ -2,6 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\qcm_entries;
+use AppBundle\Entity\questions;
+use AppBundle\Entity\skill;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -33,46 +36,93 @@ class AdminController extends Controller
 
     public function skillsAction(Request $request)
     {
+        $skills = $this->getDoctrine()
+            ->getRepository('AppBundle:skill')
+            ->findAll();
         // replace this example code with whatever you need
-        return $this->render('admin/index.html.twig', [
+        return $this->render('admin/skill.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
+            'skills' => $skills,
+        ]);
+    }
+
+    public function skillscreateAction(Request $request)
+    {
+        $skill_data = $request->request->all();
+        if (!empty($skill_data)) {
+            $skill = new skill();
+            $skill->setCode($skill_data['code']);
+            $skill->setName($skill_data['name']);
+            $skill->setCategory($skill_data['competence']);
+            $em = $this->getDoctrine()->getManager();
+            // needed to get question id
+            $em->persist($skill);
+            $em->flush();
+        }
+        return $this->render('admin/skillcreate.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
         ]);
     }
 
-    /*
-        public function skillscreateAction(Request $request)
-        {
-            // replace this example code with whatever you need
-            return $this->render('admin/skillcreate.html.twig', [
-                'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
-            ]);
-        }
-    */
     public function questioncreateAction(Request $request)
     {
-        $question = $this->getDoctrine()
-            ->getRepository('AppBundle:questions')
-            ->findAll();
-        $form = $this->createFormBuilder($question)
-            ->add("Fonctionnelle", CheckboxType::class)
-            ->add("contenue", TextType::class)
-            ->add("type", ChoiceType::class, array(
-                'choices' => array(
-                    'QCM' => 0,
-                    'Trouver l`erreur' => 1,
-                    'Reponse chiffre' => 2,
-                    'Reponse text' => 3,
-                )))
-            ->add('save', SubmitType::class, array('label' => 'Create Post'))
-            ->getForm()
-            ->createView();
-        // replace this example code with whatever you need
+        $error = false;
+        $question_data = $request->request->all();
+        if (!empty($question_data)) {
+            /*save initial data questions*/
+            if (!is_string($question_data["content_large"]) ||
+                empty($question_data["content_large"])
+            ) {
+                $error = true;
+            }
+            $question = new questions();
+            $question->setQcm(($question_data["func"] == "question_func") ? true : false); //TODO: change to functionnal/human
+            $question->setContent($question_data["content_large"]);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($question);
+            if ($question_data["func"] == "question_func") {
+                /**
+                 * Functionnal type question
+                 */
+                if ($question_data["question_type"] == "qcm") {
+                    for ($i = 1; $i <= 4; $i++) {
+                        $question->setType(0);
+                        // needed to get question id
+                        $em->flush();
+                        $entry = new qcm_entries();
+                        $entry->setQuestionId($question->getId());
+                        $entry->setAwnser($question_data["qcm_" . $i]);
+                        $entry->setCorrect((isset($question_data["qcm_" . $i . "_valid"])) ? 1 : 0);
+                        $em->persist($entry);
+                    }
+                } elseif ($question_data["question_type"] == "error") {
+                    $question->setType(1);
+                    $question->setValidline($question_data["num_res"]);
+                    $question->setCode($question_data["error"]);
+                } elseif ($question_data["question_type"] == "valid") {
+                    $question->setType(2);
+                    $question->getValidline($question_data["truefalse"]);
+                } elseif ($question_data["question_type"] == "number") {
+                    $question->setType(3);
+                    $question->getValidline($question_data["num_res"]);
+                } else {
+                    /*Error*/
+                }
+            } else {
+                if ($question_data["h_question_type"] == "qcm") {
+                    $question->setType(0);
+                    //$question->setCode();
+                } elseif ($question_data["question_type"] == "error") {
+                    $question->setType(1);
+                }
+            }
+            $em->flush();
+            // replace this example code with whatever you need
+        }
         return $this->render('admin/questioncreate.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
-            'form' => $form,
         ]);
     }
-
     public function questionAction(Request $request)
     {
         // replace this example code with whatever you need
