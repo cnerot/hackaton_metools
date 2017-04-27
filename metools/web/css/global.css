@@ -23,10 +23,12 @@ button{
     background-color: rgba(49, 55, 74, 1);
     height: 120px;
     text-align: center;
+    text-transform: uppercase;
+    font-weight:bold ;
 }
 .menu-item {
     display: inline-block;
-    margin-left: 10px;
+    margin-left: 20px;
     padding: 10px;
     margin-top: 35px;
     opacity: 1;
@@ -74,9 +76,8 @@ button{
 }
 .footer {
     width: 100%;
-    height: 100px;
     position: absolute;
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
     bottom: 0;
     background-color: #31374A;
@@ -84,12 +85,22 @@ button{
     border-top: solid 10px #FFA155;
 }
 
+.footer img{
+    margin-left: 15px;
+    width: 40%;
+}
+
+#copyright{
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
 .featured-item span{
     display: block;
 }
 
 .bloc-front{
-    padding-bottom: 20px;
+    padding-bottom: 60px;
 }
 /* ACCUEIL */
 
@@ -101,7 +112,7 @@ button{
 
 #profile-card{
     display: inline-flex;
-    width: 550px;
+    width: 591px;
     height: 304px;
     border: solid 2px #C0C0C0;
 }
@@ -178,6 +189,52 @@ button{
     background-color: #DF6002;
 }
 
+.description-item{
+    margin-left: 15px;
+    margin-top: 10px;
+}
+.nom-prenom{
+    color: #31374a;
+    font-weight: bold;
+}
+
+.age-lieu{
+
+}
+
+.site-web a{
+    color: #fd8224;
+    font-weight: bold;
+}
+
+.site-web a:hover{
+    color: #DF6002;
+    text-decoration: none;
+}
+
+.etat-profil{
+
+}
+
+.competences{
+
+}
+
+.bouton-modifier{
+    border: none;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 2px;
+    width: 312px;
+    height: 50px;
+    color: white;
+    background-color: #31374a;
+    font-size: 1.2em;
+}
+
+.bouton-modifier:hover{
+    background-color: #151822;
+}
 /* Question */
 
 
@@ -242,4 +299,11 @@ button{
     color:#FFA155;
 }
 
+.progression-jeu .orange{
+    text-transform: uppercase;
+    font-weight: 300;
+}
 
+.progression-jeu b{
+
+}
