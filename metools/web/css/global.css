@@ -76,9 +76,8 @@ button{
 }
 .footer {
     width: 100%;
-    height: 100px;
     position: absolute;
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
     bottom: 0;
     background-color: #31374A;
@@ -86,12 +85,22 @@ button{
     border-top: solid 10px #FFA155;
 }
 
+.footer img{
+    margin-left: 15px;
+    width: 40%;
+}
+
+#copyright{
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
 .featured-item span{
     display: block;
 }
 
 .bloc-front{
-    padding-bottom: 20px;
+    padding-bottom: 60px;
 }
 /* ACCUEIL */
 
