@@ -244,4 +244,11 @@ button{
     color:#FFA155;
 }
 
+.progression-jeu .orange{
+    text-transform: uppercase;
+    font-weight: 300;
+}
 
+.progression-jeu b{
+
+}
