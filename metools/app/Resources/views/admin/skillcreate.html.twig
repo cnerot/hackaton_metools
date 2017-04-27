@@ -1,0 +1,15 @@
+{% extends 'admin.html.twig' %}
+
+{% block body %}
+<form method="POST" action="{{ url("admin_skillcreate") }}">
+    <input type="text" name="code">
+    <input type="text" name="name">
+    <select name="competence">
+        <option>fonctionnel</option>
+        <option>artistique</option>
+        <option>commercial</option>
+        <option>communication</option>
+    </select>
+    <input type="submit" value="Ajouter la Competence">
+</form>
+{% endblock %}
