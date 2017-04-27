@@ -13,7 +13,7 @@
 <body>
 
 
-{% if app.request.get('_route') != 'login' %}
+{% if app.request.get('_route') != 'login' and app.request.get('_route') != 'inscription'   %}
     <div class="menu">
         <div class="menu-item first logo">
             {% if app.request.get('_route') == 'game' %}
