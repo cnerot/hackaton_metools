@@ -1,15 +1,10 @@
 {% extends 'base.html.twig' %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-{% endblock %}
 {% block body %}
-    <div class="container-fluid">
+    <div class="container-fluid bloc-front">
         {% block header %}
-            {{ parent() }}
             <div class="row">
                 <div class="header col-lg-12">
-                    <img src="{% block header_img %}{{ asset('img/placeholder.jpg') }}{% endblock %}">
+                    <a href="{% block header_img_url %} {{ path('homepage') }} {% endblock %}"><img class="header-img" src="{% block header_img %} {{ asset('img/placeholder.jpg') }}{% endblock %}"/></a>
                 </div>
             </div>
         {% endblock %}

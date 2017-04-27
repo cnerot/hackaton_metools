@@ -3,50 +3,52 @@
 <head>
     <meta charset="UTF-8"/>
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/global.css') }}">
-    {% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
-<header>
-    {% block header %}
-        <div class="menu">
-            <div class="menu-item first logo">
-                <a href="{{ path('homepage') }}"><img src="{{ asset('img/logo.png') }}" /></a>
-            </div>
-            <div class="menu-item">
+
+
+<div class="menu">
+    <div class="menu-item first logo">
+        {% if app.request.get('_route') == 'game' %}
+            <img src="{{ asset('img/logo.png') }}" />
+        {% else %}
+            <a href="{{ path('homepage') }}"><img src="{{ asset('img/logo.png') }}" /></a>
+        {% endif %}
+    </div>
+    {% if app.request.get('_route') != 'game' %}
+    <div class="menu-item">
         <span>
-            <a href="#">Questions</a>
+            <a href="{{ path('game') }}">Jouer</a>
         </span>
             </div>
             <div class="menu-item">
         <span>
-            <a href="#">Résultats & partage</a>
+            <a href="{{ path('homepage') }}">Profil</a>
         </span>
             </div>
             <div class="menu-item">
         <span>
-            <a class="" href="#">Courbe d'évolution</a>
+            <a href="{{ path('evolution') }}">Evolution</a>
         </span>
             </div>
             <div class="menu-item">
         <span>
-            <a class="" href="#">Profil</a>
+            <a href="{{ path('homepage') }}">Déconnexion</a>
         </span>
-            </div>
-            <div class="menu-item last logo">
-                <a href="http://www.gfi.world/fr/"><img src="{{ asset('img/logo_gfi.png') }}" /></a>
-            </div>
-        </div>
-    {% endblock %}
-</header>
+    </div>
+    {% endif %}
+</div>
+
 {% block body %}{% endblock %}
+{% block footer %}
 <div class="footer">
     Ceci est le footer
 </div>
+{% endblock %}
 {% block javascripts %}{% endblock %}
 </body>
 </html>
