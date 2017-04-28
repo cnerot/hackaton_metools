@@ -1,8 +1,12 @@
 {% extends 'front.html.twig' %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <input type="submit" />
-    {{ form_end(form) }}
+    <div class="container-fluid">
+        <div id="edition-profil">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" class="ajout-question"/>
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}
