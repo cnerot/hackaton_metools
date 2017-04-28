@@ -20,7 +20,7 @@
                                 {% if (question.type ==3) %}Vrai/faux{% endif %}
                             </td>
                             <td>{{ question.content }}</td>
-                            <td>{% for skill in skills %}
+                              <td>{% for skill in qskills[question.id] %}
                                     {{ skill.name }}<br>
                                 {% endfor %}
                             </td>

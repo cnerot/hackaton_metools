@@ -3,7 +3,7 @@
 {% block front %}
     <div class="row" id="lancer-jeu">
         <div class="col-lg-offset-5">
-            <span class="orange"><h1>Bonjour Jane !</h1></span><br>
+            <span class="orange"><h1>Bonjour {{ user.name }} !</h1></span><br>
             Bienvenue sur notre nouveau serious game.<br>
             Viens évaluer et tester tes compétences<br>
             <a href="{{ path('game') }}">
@@ -16,26 +16,20 @@
         <div id="profile-card">
             <div class="profile-item" id="profile-avatar">
                 <img src="{{ asset('img/portrait1.png') }}"/>
-                <div id="profile-title">Title</div>
+                <div id="profile-title"></div>
             </div>
             <div id="profile-description" class="profile-item">
                 <div class="nom-prenom description-item">
-                    Jane Doe
+                    {{ user.surname }} {{ user.name }}
                 </div>
                 <div class="age-lieu description-item">
-                    24 ans <br>
-                    Paris 18
+                    {{ user.age }} ans <br>
+                    {{ user.address }}
                 </div>
                 <div class="site-web description-item">
-                    <a href="{{ path('homepage') }}">www.janedoe.com</a>
+                    <a href="www.google.com">www.google.com</a>
                 </div>
-                <div class="etat-profil description-item">
-                    Parties : <b> 7 </b> <br>
-                </div>
-                <div class="competences description-item">
-                    Compétence majeure : <b>PHP</b><br>
-                    Talent majeur : <b>Leader</b>
-                </div>
+
                 <a href="{{ url('edituser') }}?user={{ user.id }}"><button class="bouton-modifier"> Modifier le profil</button></a>
             </div>
         </div>
@@ -133,7 +127,7 @@
                         'rgba(0,255,0,1)'
                     ],
                     borderWidth: 1,
-                    data: [17, 25]
+                    data: [17,5, 25]
                 },
                 {
                     label: "Competence 2",
@@ -142,7 +136,7 @@
                         'rgba(255, 0, 0, 1)'
                     ],
                     borderWidth: 1,
-                    data: [3, 0]
+                    data: [3, 0,15]
                 }
             ]
         };
