@@ -6,65 +6,109 @@
             <span class="orange"><b>Bonjour Jane !</b></span><br>
             Bienvenue sur notre nouveau serious game.<br>
             Viens évaluer et tester tes compétences<br>
-            <a href="{{ path('game') }}"><button >Jouer</button></a>
+            <a href="{{ path('game') }}">
+                <button>Jouer</button>
+            </a>
         </div>
     </div>
     <div class="row" id="profile">
-        <div class="col-lg-offset-3 col-lg-4">
-            <div id="profile-card">
-                <div class="profile-item" id="profile-avatar">
-                    <img src="{{ asset('img/portrait1.png') }}" />
-                    <div id="profile-title">Title</div>
+    <div class="col-lg-offset-3 col-lg-4">
+        <div id="profile-card">
+            <div class="profile-item" id="profile-avatar">
+                <img src="{{ asset('img/portrait1.png') }}"/>
+                <div id="profile-title">Title</div>
+            </div>
+            <div id="profile-description" class="profile-item">
+                <div class="nom-prenom description-item">
+                    Jane Doe
                 </div>
-                <div id="profile-description" class="profile-item">
-                    <div class="nom-prenom description-item">
-                        Jane Doe
-                    </div>
-                    <div class="age-lieu description-item">
-                        24 ans <br>
-                        Paris 18
-                    </div>
-                    <div class="site-web description-item">
-                        <a href="{{ path('homepage') }}">www.janedoe.com</a>
-                    </div>
-                    <div class="etat-profil description-item">
-                        Parties : <b> 7 </b> <br>
-                        Profil completé à <b> 75% </b>
-                    </div>
-                    <div class="competences description-item">
-                        Compétence majeure : <b>PHP</b><br>
-                        Talent majeur : <b>Leader</b>
-                    </div>
-                    <button class="bouton-modifier"> Modifier le profil </button>
+                <div class="age-lieu description-item">
+                    24 ans <br>
+                    Paris 18
                 </div>
+                <div class="site-web description-item">
+                    <a href="{{ path('homepage') }}">www.janedoe.com</a>
+                </div>
+                <div class="etat-profil description-item">
+                    Parties : <b> 7 </b> <br>
+                </div>
+                <div class="competences description-item">
+                    Compétence majeure : <b>PHP</b><br>
+                    Talent majeur : <b>Leader</b>
+                </div>
+                <button class="bouton-modifier"> Modifier le profil</button>
             </div>
         </div>
+    </div>
+
+    {% set cpt = 0 %}
+    {% for skill in skills %}
         <div class="col-lg-2">
             <div class="skill-item">
-
+                    <canvas id="myChart_{{ skill.skillId }}"></canvas>
             </div>
         </div>
+        {% if (cpt % 3 == 0) %}
+            </div>
+            <div class="row">
+        {% endif %}
+        {% set cpt = cpt + 1 %}
+
+    {% endfor %}
     </div>
-    <div class="row">
-        <div class="col-lg-offset-3 col-lg-2">
-            <div class="skill-item"></div>
-        </div>
-        <div class="col-lg-2">
-            <div class="skill-item"></div>
-        </div>
-        <div class="col-lg-2">
-            <div class="skill-item"></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-offset-3 col-lg-2">
-            <div class="skill-item"></div>
-        </div>
-        <div class="col-lg-2">
-            <div class="skill-item"></div>
-        </div>
-        <div class="col-lg-2">
-            <div class="skill-item"></div>
+    <!--<div class="col-lg-2">
+        <div class="skill-item">
         </div>
     </div>
+</div>
+<div class="row">
+    <div class="col-lg-offset-3 col-lg-2">
+        <div class="skill-item"></div>
+    </div>
+    <div class="col-lg-2">
+        <div class="skill-item"></div>
+    </div>
+    <div class="col-lg-2">
+        <div class="skill-item"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-offset-3 col-lg-2">
+        <div class="skill-item"></div>
+    </div>
+    <div class="col-lg-2">
+        <div class="skill-item"></div>
+    </div>
+    <div class="col-lg-2">
+        <div class="skill-item"></div>
+    </div>
+</div>-->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        {% for skill in skills %}
+        var myPieChart_{{ skill.skillId }} = new Chart(document.getElementById("myChart_{{ skill.skillId }}").getContext("2d"), {
+            type: 'pie',
+            data: {
+                labels: [
+                    "Red",
+                ],
+                datasets: [
+                    {
+                        data: [{{ skill.level }}, {{ 100 - skill.level }}],
+                        backgroundColor: [
+                            "#FF6384",
+                            "#36A2EB"
+                        ],
+                        hoverBackgroundColor: [
+                            "#FF6384",
+                            "#36A2EB"
+                        ]
+                    }]
+            }
+        });
+        {% endfor %}
+    </script>
 {% endblock %}

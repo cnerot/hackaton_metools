@@ -26,6 +26,10 @@ class skill_lvl
      * @var int
      */
     private $level;
+    /**
+     * @var datetime
+     */
+    private $date;
 
 
     /**
@@ -109,5 +113,22 @@ class skill_lvl
     {
         return $this->level;
     }
+
+    /**
+     * @return date
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param date $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
 }
 
