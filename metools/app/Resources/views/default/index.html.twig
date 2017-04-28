@@ -45,7 +45,7 @@
     {% for skill in skills %}
         <div class="col-lg-2">
             <div class="skill-item">
-                    <canvas id="myChart_{{ skill.skillId }}"></canvas>
+                <canvas id="myChart_{{ skill.skillId }}"></canvas>
             </div>
         </div>
         {% if (cpt % 3 == 0) %}
@@ -89,6 +89,8 @@
     {{ parent() }}
     <script>
         {% for skill in skills %}
+
+
         var myPieChart_{{ skill.skillId }} = new Chart(document.getElementById("myChart_{{ skill.skillId }}").getContext("2d"), {
             type: 'pie',
             data: {

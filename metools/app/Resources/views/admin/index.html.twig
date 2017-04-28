@@ -8,8 +8,9 @@
         <input type="submit" value="Valider">
         <div class="filtres">
             <h2>Trier par : </h2>
-            {% for i in 0..4 %}
-                <span class="filtre_label"><input type="checkbox" name="{{ i }}"> Filtre {{ i }} </span><br>
+            {% for skill in skill %}
+                <span class="filtre_label"><input class="skills" type="checkbox" name="skill"
+                                                  value="{{ skill.id }}"> {{ skill.name }} </span><br>
             {% endfor %}
         </div>
     </div>
@@ -21,25 +22,45 @@
                     <td>Nom</td>
                     <td>Âge</td>
                     <td>Ville</td>
-                    <td class="competences-candidat">Java</td>
-                    <td class="competences-candidat">Php</td>
-                    <td class="competences-candidat">Ingénieur</td>
-                    <td class="competences-candidat">Leader</td>
-                    <td class="competences-candidat">Créatif</td>
                 </tr>
-                {% for i in 0..10 %}
+                <tbody id="table_content">
+                {% for user in users %}
                     <tr class="description-profils">
-                        <td><b>Jane Doe</b></td>
-                        <td>24 ans</td>
-                        <td>Paris 75018</td>
-                        <td class="competences-candidat">63</td>
-                        <td class="competences-candidat">82</td>
-                        <td class="competences-candidat">76</td>
-                        <td class="competences-candidat">87</td>
-                        <td class="competences-candidat">34</td>
+                        <td><b>{{ user.name }} {{ user.surname }}</b></td>
+                        <td>{{ user.age }} ans</td>
+                        <td>{{ user.address }}</td>
                     </tr>
                 {% endfor %}
+                </tbody>
             </table>
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        function func() {
+            var filters = [];
+            $(".skills").each(function () {
+                if ($(this).prop('checked')) {
+                    filters.push($(this).val());
+                }
+            });
+            $.ajax({
+                url: '{{ url("admin_filtered") }}',
+                type: 'POST',
+                data: 'filter=' + filters.join("_"),
+                dataType: 'html',
+                success: function (code_html, statut) {
+                    $('#table_content').html(code_html);
+                }
+            });
+        }
+        $(".skills").each(function () {
+            $(this).mouseup(function () {
+                func();
+            });
+        });
+
+    </script>
 {% endblock %}

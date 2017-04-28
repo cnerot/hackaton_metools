@@ -17,10 +17,21 @@ class DefaultController extends Controller
         $skills = $this->getDoctrine()
             ->getRepository('AppBundle:skill_lvl')
             ->findBy(["userId" => 1]);
+        $res_skill = array();
+        foreach ($skills as $skill){
+            if (!isset($res_skill[$skill->getSkillId()])){
+                $res_skill[$skill->getSkillId()] = $skill;
+            } else {
+                if ( $res_skill[$skill->getSkillId()]->getDate()< $skill->getDate()){
+                    $res_skill[$skill->getSkillId()] = $skill;
+                }
+            }
+        }
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
-            'skills' => $skills
+            'skills' => $res_skill,
+            'all_skills' => $skills
         ]);
     }
 
