@@ -39,7 +39,6 @@ class AdminController extends Controller
     public function filteredAction(Request $request)
     {
         $req = $request->request->all();
-
         if ($req['filter'] == "") {
             $users = $this->getDoctrine()
                 ->getRepository('AppBundle:User')
@@ -58,9 +57,21 @@ class AdminController extends Controller
                 ->getRepository('AppBundle:User')
                 ->findById($users_ids);
         }
+        $res_users = array();
+        if ($req['name'] != ""){
+            foreach ($users as $user){
+                if (strpos(strtolower($user->getLogin()), $req['name']) > -1 ||
+                    strpos(strtolower($user->getName()), $req['name']) > -1 ||
+                    strpos(strtolower($user->getSurname()), $req['name']) > -1) {
+                    $res_users[] = $user;
+                }
+            }
+        } else {
+            $res_users = $users;
+        }
         return $this->render('admin/table.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
-            'users' => $users,
+            'users' => $res_users,
         ]);
     }
 
