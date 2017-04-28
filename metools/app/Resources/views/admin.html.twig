@@ -3,16 +3,6 @@
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 {% endblock %}
-{% block header %}
-    {{ parent() }}
-    <nav class="admin_menu">
-        <ul>
-            <li><a href="{{ url("admin_index") }}">Utilisateurs</a></li>
-            <li><a href="{{ url("admin_question") }}">Questions</a></li>
-            <li><a href="{{ url("admin_skill") }}">Competences</a></li>
-        </ul>
-    </nav>
-{% endblock %}
 {% block javascripts %}
     {{ parent() }}
 {% endblock %}
@@ -23,17 +13,17 @@
         </div>
             <div class="menu-item">
             <span>
-                <a href="{{ path('homepage') }}">Accueil</a>
+                <a href="{{ url("admin_index") }}">Accueil admin</a>
             </span>
             </div>
             <div class="menu-item">
             <span>
-                <a href="{{ path('game') }}">Jouer</a>
+                <a href="{{ url("admin_question") }}">Questions</a>
             </span>
             </div>
             <div class="menu-item">
             <span>
-                <a href="{{ path('evolution') }}">Evolution</a>
+                <a href="{{ url("admin_skill") }}">Compétences</a>
             </span>
             </div>
             <div class="menu-item">

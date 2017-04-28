@@ -85,9 +85,15 @@ button{
     border-top: solid 10px #FFA155;
 }
 
-.footer img{
+#logo-footer{
     margin-left: 15px;
     width: 40%;
+}
+
+.reseau-social{
+    width: 40px;
+    margin-top: 50px;
+    margin-right: 10px;
 }
 
 #copyright{
@@ -318,18 +324,18 @@ button{
 /* Admin accueil */
 
 
-#tableau-profils{
+.tableau-admin{
     text-align: center;
 }
 
-#tableau-profils table{
+.tableau-admin table{
     margin: 0 auto;
     width: 60%;
     margin-top: 15px;
     margin-bottom: 30px;
 }
 
-#titres{
+.tableau-titres{
     font-family: 'Merriweather', serif;
     color: #AAAAAA;
     font-weight: bold;
@@ -338,7 +344,7 @@ button{
     height: 30px;
 }
 
-#tableau-profils tr{
+.tableau-admin tr{
     border-bottom: solid 1px #6E6E6E;
 }
 
@@ -417,4 +423,23 @@ canvas, iframe{
 #chart{
     width: 50%;
     margin-left: 25%;
+}
+
+.ajout-question{
+    background-color: #fd8224;
+    border: none;
+    color: #f6f6f6;
+    width: 250px;
+    height: 50px;
+    font-size: 1.3em;
+    margin-bottom: 20px;
+}
+
+.ajout-question:hover{
+    background-color: #DF6002;
+}
+
+.type-question{
+    font-weight: bold;
+    text-align: left;
 }
