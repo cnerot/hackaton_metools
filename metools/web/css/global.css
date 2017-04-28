@@ -3,6 +3,7 @@
 html{
     position:relative;
     min-height: 100%;
+    background-color: #31374a;
 }
 
 body{
@@ -79,7 +80,6 @@ button{
     position: absolute;
     text-align: left;
     vertical-align: middle;
-    bottom: 0;
     background-color: #31374A;
     color: white;
     border-top: solid 10px #FFA155;
@@ -100,7 +100,7 @@ button{
 }
 
 .bloc-front{
-    padding-bottom: 60px;
+    height: auto;
 }
 /* ACCUEIL */
 
@@ -115,6 +115,7 @@ button{
     width: 591px;
     height: 304px;
     border: solid 2px #C0C0C0;
+    background-color: #F6F6F6;
 }
 
 #profile-avatar{
@@ -156,6 +157,8 @@ button{
 
 #lancer-jeu{
     text-transform: uppercase;
+    background: url('../img/slider.png') no-repeat center ;
+    background-size: contain;
     background-color: #31374A;
     color: white;
     margin-top: 0;
@@ -169,9 +172,12 @@ button{
     font-size: 0.8em;
 }
 
-#lancer-jeu b{
+#lancer-jeu h1{
+    font-weight: bold;
     font-size: 1.8em;
+    margin-bottom: 0;
 }
+
 #lancer-jeu button{
     margin-top: 10px;
     border: none;
@@ -251,7 +257,7 @@ button{
 }
 
 #bloc-jeu input{
-    color: black;
+    color: white;
 }
 .validation-reponse{
     border: none;
@@ -306,4 +312,105 @@ button{
 
 .progression-jeu b{
 
+}
+
+
+/* Admin accueil */
+
+
+#tableau-profils{
+    text-align: center;
+}
+
+#tableau-profils table{
+    margin: 0 auto;
+    width: 60%;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+#titres{
+    font-family: 'Merriweather', serif;
+    color: #AAAAAA;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+    height: 30px;
+}
+
+#tableau-profils tr{
+    border-bottom: solid 1px #6E6E6E;
+}
+
+.description-profils{
+    text-transform: uppercase;
+    text-align: left;
+    height: 50px;
+}
+
+
+.competences-candidat{
+    font-weight: bold;
+    text-align: center;
+}
+
+#recherche-profil{
+    background-color: #DF6002;
+    color: #f6f6f6;
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+#recherche-profil h1{
+    text-align: center;
+}
+
+#recherche-profil hr{
+    width: 40px;
+}
+
+#recherche-profil input[type='text']{
+    width: 600px;
+    height: 60px;
+}
+
+#recherche-profil input[type='submit']{
+    border: none;
+    background-color: black;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 200px;
+    height: 50px;
+    font-size: 1.6em;
+    font-family: 'Merriweather', serif;
+}
+
+.filtres{
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.filtre_label{
+    color:black;
+}
+
+/* Admin profile*/
+.profile-user-admin{
+    background-color: #DF6002;
+}
+
+#graph{
+    text-align: center;
+    background-color: #31374a;
+}
+
+.skill_graph{
+    text-align: center;
+    width: 30% !important;
+    height: 30% !important;
+    display: inline-flex !important;
+    margin: 0 auto;
+}
+canvas, iframe{
+    color: white !important;
 }
