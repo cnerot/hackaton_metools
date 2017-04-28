@@ -265,6 +265,10 @@ button{
 #bloc-jeu input{
     color: white;
 }
+
+#bloc-jeu input[type='text']{
+    color:black;
+}
 .validation-reponse{
     border: none;
     background-color: #fd8224;
@@ -469,3 +473,9 @@ canvas, iframe{
 .questions input[type='submit']:hover{
     background-color: #151822;
 }
+
+#edition-profil{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
