@@ -161,7 +161,7 @@ class AdminController extends Controller
                 $error = true;
             }
             $question = new questions();
-            $question->setQcm(($question_data["func"] == "question_func") ? true : false); //TODO: change to functionnal/human
+            $question->setQcm(true); //TODO: change to functionnal/human
             $question->setContent($question_data["content_large"]);
             $em = $this->getDoctrine()->getManager();
             $em->persist($question);
