@@ -45,6 +45,28 @@ class User implements UserInterface
      */
     private $address;
 
+    /**
+     * @var string
+     */
+    private $admin;
+
+    /**
+     * @return string
+     */
+    public function getAdmin()
+    {
+        return $this->admin;
+    }
+
+    /**
+     * @param string $admin
+     */
+    public function setAdmin($admin)
+    {
+        $this->admin = $admin;
+    }
+
+
 
     /**
      * Get id
