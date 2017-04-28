@@ -1,6 +1,6 @@
 {% for user in users %}
     <tr class="description-profils">
-        <td><b>{{ user.name }} {{ user.surname }}</b></td>
+        <td><a href="{{ url('admin_profile') }}?user={{ user.id }}"><b>{{ user.name }} {{ user.surname }}</b></a></td>
         <td>{{ user.age }} ans</td>
         <td>{{ user.address }}</td>
     </tr>
