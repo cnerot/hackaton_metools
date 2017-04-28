@@ -3,11 +3,14 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\skill_lvl;
 use AppBundle\Entity\User;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\DateTime;
-
+use Symfony\Component\Form\Forms;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class DefaultController extends Controller
 {
@@ -59,10 +62,58 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
             'skills' => $res_skill,
             'skills_data' => $r_skill,
-            'all_skills' => $skills_res
+            'all_skills' => $skills_res,
+            'user' => $this->getUser()
+
         ]);
     }
+    public function fromArray($entity,array $attributes)
+    {
+        foreach ($attributes as $name => $value) {
+            if (property_exists($this, $name)) {
+                $methodName = $this->_getSetterName($name);
+                if ($methodName) {
+                    $this->{$methodName}($value);
+                } else {
+                    $this->$name = $value;
+                }
+            }
+        }
+    }
+    /**
+     * @Route("/user/edit", name="edituser")
+     */
+    public function edituserAction(Request $request)
+    {
+        $req = $request->request->all();
+        if (!empty($req["form"])){
+            $n_user = $this->getUser();
+            $n_user->setName($req["form"]["name"]);
+            $n_user->setSurname($req["form"]["surname"]);
+            $n_user->setLogin($req["form"]["login"]);
+            $n_user->setAge($req["form"]["age"]);
+            $n_user->setAddress($req["form"]["address"]);
+            $em = $this->getDoctrine()->getManager();
 
+            $em->persist($n_user);
+            $em->flush();
+            return $this->redirectToRoute('homepage');
+
+        }
+        $formFactory = Forms::createFormFactoryBuilder();
+        $form = $this->createFormBuilder($this->getUser())
+            ->add('name', TextType::class)
+            ->add('surname', TextType::class)
+            ->add('login', TextType::class)
+            ->add('age', IntegerType::class)
+            ->add('address', TextType::class)
+            ->getForm();
+
+        return $this->render('default/profile.html.twig', array(
+            'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
+            'form' => $form->createView(),
+        ));
+    }
     /**
      * @Route("/login", name="login")
      */
