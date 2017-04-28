@@ -23,10 +23,16 @@ class DefaultController extends Controller
         foreach ($skills as $skill) {
             if (!isset($res_skill[$skill->getSkillId()])) {
                 $res_skill[$skill->getSkillId()] = $skill;
+                $r_skill[$skill->getSkillId()]  = $this->getDoctrine()
+                    ->getRepository('AppBundle:skill')
+                    ->findOneBy(["id" => $skill->getSkillId()]);
             } else {
                 if ($res_skill[$skill->getSkillId()]->getDate() < $skill->getDate()) {
                     $res_skill[$skill->getSkillId()] = $skill;
                 }
+                $r_skill[$skill->getSkillId()]  = $this->getDoctrine()
+                    ->getRepository('AppBundle:skill')
+                    ->findOneBy(["id" => $skill->getSkillId()]);
             }
         }
         // replace this example code with whatever you need
@@ -43,12 +49,16 @@ class DefaultController extends Controller
                     array('login' => $login, 'password' => $password)
                 );
         }
-
+        $skills_res = array();
+        foreach ($skills as $skill){
+            $skills_res[$skill->getDate()->format('Y-m-d')][$skill->getSkillId()] = $skill;
+        }
 
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
             'skills' => $res_skill,
-            'all_skills' => $skills
+            'skills_data' => $r_skill,
+            'all_skills' => $skills_res
         ]);
     }
 
