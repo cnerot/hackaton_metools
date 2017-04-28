@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\qcm_entries;
 use AppBundle\Entity\questions;
+use AppBundle\Entity\questionskill;
 use AppBundle\Entity\skill;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,7 +22,7 @@ class AdminController extends Controller
     public function indexAction(Request $request)
     {
         $users = $this->getDoctrine()
-            ->getRepository('AppBundle:user')
+            ->getRepository('AppBundle:User')
             ->findAll();
         $skill = $this->getDoctrine()
             ->getRepository('AppBundle:skill')
@@ -41,7 +42,7 @@ class AdminController extends Controller
 
         if ($req['filter'] == "") {
             $users = $this->getDoctrine()
-                ->getRepository('AppBundle:user')
+                ->getRepository('AppBundle:User')
                 ->findAll();
         } else {
             $skills = $this->getDoctrine()
@@ -54,7 +55,7 @@ class AdminController extends Controller
                 }
             }
             $users = $this->getDoctrine()
-                ->getRepository('AppBundle:user')
+                ->getRepository('AppBundle:User')
                 ->findById($users_ids);
         }
         return $this->render('admin/table.html.twig', [
@@ -66,9 +67,40 @@ class AdminController extends Controller
     public
     function profileAction(Request $request)
     {
+        $skills = $this->getDoctrine()
+            ->getRepository('AppBundle:skill_lvl')
+            ->findBy(["userId" => $request->query->get('user')]);
+        $res_skill = array();
+        foreach ($skills as $skill) {
+            if (!isset($res_skill[$skill->getSkillId()])) {
+                $res_skill[$skill->getSkillId()] = $skill;
+            } else {
+                if ($res_skill[$skill->getSkillId()]->getDate() < $skill->getDate()) {
+                    $res_skill[$skill->getSkillId()] = $skill;
+                }
+            }
+        }
         // replace this example code with whatever you need
+        $request->request->all();
+        //var_dump($request);
+
+        if (isset($_POST['_login']) && isset($_POST['_password'])) {
+            $login = $_POST['_login'];
+            $password = $_POST['_password'];
+
+            $user = $this->getDoctrine()
+                ->getRepository('AppBundle:User')
+                ->findBy(
+                    array('login' => $login, 'password' => $password)
+                );
+        }
+
+
         return $this->render('admin/profile.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
+            'skills' => $res_skill,
+            'all_skills' => $skills,
+            'admin' => 1
         ]);
     }
 
@@ -168,10 +200,29 @@ class AdminController extends Controller
     public
     function questionAction(Request $request)
     {
+
+        $data = $request->request->all();
+        var_dump($data);
+
+        if (isset($data["question"]) && isset($data["skill"])) {
+            $skill = $this->getDoctrine()
+                ->getRepository('AppBundle:questionskill')
+                ->findOneBy([
+                    "questionId" => $data["question"],
+                    "skillId" => $data["skill"]
+                ]);
+            if ($skill == null) {
+                $questionskill = new questionskill();
+                $questionskill->setQuestionId($data["question"]);
+                $questionskill->setSkillId($data["skill"]);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($questionskill);
+                $em->flush();
+            }
+        }
         $questions = $this->getDoctrine()
             ->getRepository('AppBundle:questions')
             ->findAll();
-
         $q_skills[] = array();
         foreach ($questions as $q) {
             $q_skills[$q->getId()] = $this->getDoctrine()

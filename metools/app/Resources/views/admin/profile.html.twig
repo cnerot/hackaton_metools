@@ -1,138 +1,104 @@
 {% extends 'admin.html.twig' %}
 
 {% block body %}
-    <div class="container-fluid profile-user-admin">
-        <div class="row">
-            <div class="col-lg-offset-3 col-lg-4">
-                <div id="profile-card">
-                    <div class="profile-item" id="profile-avatar">
-                        <img src="{{ asset('img/portrait1.png') }}" />
-                        <div id="profile-title">Title</div>
-                    </div>
-                    <div id="profile-description" class="profile-item">
-                        <div class="nom-prenom description-item">
-                            Jane Doe
-                        </div>
-                        <div class="age-lieu description-item">
-                            24 ans <br>
-                            Paris 18
-                        </div>
-                        <div class="site-web description-item">
-                            <a href="{{ path('homepage') }}">www.janedoe.com</a>
-                        </div>
-                        <div class="etat-profil description-item">
-                            Parties : <b> 7 </b> <br>
-                            Profil completé à <b> 75% </b>
-                        </div>
-                        <div class="competences description-item">
-                            Compétence majeure : <b>PHP</b><br>
-                            Talent majeur : <b>Leader</b>
-                        </div>
-                        <button class="bouton-modifier"> Modifier le profil </button>
-                    </div>
+    <div class="row" id="profile">
+    <div class="col-lg-offset-3 col-lg-4">
+        <div id="profile-card">
+            <div class="profile-item" id="profile-avatar">
+                <img src="{{ asset('img/portrait1.png') }}"/>
+                <div id="profile-title">Title</div>
+            </div>
+            <div id="profile-description" class="profile-item">
+                <div class="nom-prenom description-item">
+                    Jane Doe
                 </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="skill-item">
-
+                <div class="age-lieu description-item">
+                    24 ans <br>
+                    Paris 18
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-offset-3 col-lg-2">
-                <div class="skill-item"></div>
-            </div>
-            <div class="col-lg-2">
-                <div class="skill-item"></div>
-            </div>
-            <div class="col-lg-2">
-                <div class="skill-item"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-offset-3 col-lg-2">
-                <div class="skill-item"></div>
-            </div>
-            <div class="col-lg-2">
-                <div class="skill-item"></div>
-            </div>
-            <div class="col-lg-2">
-                <div class="skill-item"></div>
+                <div class="site-web description-item">
+                    <a href="{{ path('homepage') }}">www.janedoe.com</a>
+                </div>
+                <div class="etat-profil description-item">
+                    Parties : <b> 7 </b> <br>
+                </div>
+                <div class="competences description-item">
+                    Compétence majeure : <b>PHP</b><br>
+                    Talent majeur : <b>Leader</b>
+                </div>
+                <button class="bouton-modifier"> Modifier le profil</button>
             </div>
         </div>
     </div>
-    <div class="container-fluid" id="graph">
-        <div class="skill_graph">
-            <canvas id="myChart" width="400" height="400"></canvas>
+
+    {% set cpt = 0 %}
+    {% for skill in skills %}
+        <div class="col-lg-2">
+            <div class="skill-item">
+                <canvas id="myChart_{{ skill.skillId }}"></canvas>
+            </div>
+        </div>
+        {% if (cpt % 3 == 0) %}
+            </div>
+            <div class="row">
+        {% endif %}
+        {% set cpt = cpt + 1 %}
+
+    {% endfor %}
+    </div>
+    <!--<div class="col-lg-2">
+        <div class="skill-item">
         </div>
     </div>
-
-        <div class="user_skills">
-            <div class="user_mainskills">
-                <h3>competences principales</h3>
-                {% for i in 1..3 %}
-                    <div class="mainskill">
-                        <div class="skill_data">
-                            <p>skill name</p>
-                            <p>user lvl</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="user_skills">
-                <h3>toutes competences</h3>
-                {% for i in 1..10 %}
-                    <div class="skill">
-                        <div class="skill_data">
-                            <p>skill name</p>
-                            <p>user lvl</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
+</div>
+<div class="row">
+    <div class="col-lg-offset-3 col-lg-2">
+        <div class="skill-item"></div>
+    </div>
+    <div class="col-lg-2">
+        <div class="skill-item"></div>
+    </div>
+    <div class="col-lg-2">
+        <div class="skill-item"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-offset-3 col-lg-2">
+        <div class="skill-item"></div>
+    </div>
+    <div class="col-lg-2">
+        <div class="skill-item"></div>
+    </div>
+    <div class="col-lg-2">
+        <div class="skill-item"></div>
+    </div>
+</div>-->
 {% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
     <script>
-        var data = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-                {
-                    label: "My First dataset",
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1,
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                }
-            ]
-        };
-
-        var ctx = document.getElementById("myChart");
-        var myLineChart = new Chart(ctx, {
-            type: 'bar',
-            data: data,
-            options: {
-                scales: {
-                    xAxes: [{
-                        display: false
+        {% for skill in skills %}
+        var myPieChart_{{ skill.skillId }} = new Chart(document.getElementById("myChart_{{ skill.skillId }}").getContext("2d"), {
+            type: 'pie',
+            data: {
+                labels: [
+                    "Red",
+                ],
+                datasets: [
+                    {
+                        data: [{{ skill.level }}, {{ 100 - skill.level }}],
+                        backgroundColor: [
+                            "#FF6384",
+                            "#36A2EB"
+                        ],
+                        hoverBackgroundColor: [
+                            "#FF6384",
+                            "#36A2EB"
+                        ]
                     }]
-                }
             }
         });
+        {% endfor %}
     </script>
 {% endblock %}
