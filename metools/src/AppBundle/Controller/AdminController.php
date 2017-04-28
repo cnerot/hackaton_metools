@@ -20,13 +20,51 @@ class AdminController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $users = $this->getDoctrine()
+            ->getRepository('AppBundle:user')
+            ->findAll();
+        $skill = $this->getDoctrine()
+            ->getRepository('AppBundle:skill')
+            ->findAll();
+
         // replace this example code with whatever you need
         return $this->render('admin/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
+            'users' => $users,
+            'skill' => $skill
         ]);
     }
 
-    public function profileAction(Request $request)
+    public function filteredAction(Request $request)
+    {
+        $req = $request->request->all();
+
+        if ($req['filter'] == "") {
+            $users = $this->getDoctrine()
+                ->getRepository('AppBundle:user')
+                ->findAll();
+        } else {
+            $skills = $this->getDoctrine()
+                ->getRepository('AppBundle:skill_lvl')
+                ->findBy(['skillId' => explode('_', $req['filter'])]);
+            $users_ids = array();
+            foreach ($skills as $skill) {
+                if ($skill->getlevel() > 50) {
+                    $users_ids[] = $skill->getUserId();
+                }
+            }
+            $users = $this->getDoctrine()
+                ->getRepository('AppBundle:user')
+                ->findById($users_ids);
+        }
+        return $this->render('admin/table.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
+            'users' => $users,
+        ]);
+    }
+
+    public
+    function profileAction(Request $request)
     {
         // replace this example code with whatever you need
         return $this->render('admin/profile.html.twig', [
@@ -34,7 +72,8 @@ class AdminController extends Controller
         ]);
     }
 
-    public function skillsAction(Request $request)
+    public
+    function skillsAction(Request $request)
     {
         $skills = $this->getDoctrine()
             ->getRepository('AppBundle:skill')
@@ -46,7 +85,8 @@ class AdminController extends Controller
         ]);
     }
 
-    public function skillscreateAction(Request $request)
+    public
+    function skillscreateAction(Request $request)
     {
         $skill_data = $request->request->all();
         if (!empty($skill_data)) {
@@ -64,7 +104,8 @@ class AdminController extends Controller
         ]);
     }
 
-    public function questioncreateAction(Request $request)
+    public
+    function questioncreateAction(Request $request)
     {
         $error = false;
         $question_data = $request->request->all();
@@ -123,30 +164,30 @@ class AdminController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
         ]);
     }
-    public function questionAction(Request $request)
+
+    public
+    function questionAction(Request $request)
     {
         $questions = $this->getDoctrine()
             ->getRepository('AppBundle:questions')
             ->findAll();
 
         $q_skills[] = array();
-        foreach ($questions as $q){
+        foreach ($questions as $q) {
             $q_skills[$q->getId()] = $this->getDoctrine()
                 ->getRepository('AppBundle:questionskill')
                 ->findBy(["questionId" => $q->getId()]);
         }
         $question_skills[] = array();
-        foreach ($q_skills as $k=>$s){
+        foreach ($q_skills as $k => $s) {
             $temp = array();
-            foreach ($s as $skill){
+            foreach ($s as $skill) {
                 $temp[] = $this->getDoctrine()
                     ->getRepository('AppBundle:skill')
                     ->findOneBy(["id" => $skill->getSkillId()]);
             }
             $question_skills[$k] = $temp;
         }
-
-
         $skills = $this->getDoctrine()
             ->getRepository('AppBundle:skill')
             ->findAll();
