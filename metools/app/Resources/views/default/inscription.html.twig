@@ -1,0 +1,43 @@
+{% extends 'front.html.twig' %}
+    {% block menu %} {% endblock %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/lucas.css') }}">
+    {% endblock %}
+    {% block header_img %}{% endblock %}
+    {% block header_img_url %}{% endblock %}
+    {% block body %}
+
+        <div id="left">
+
+        </div>
+
+        <div id="right">
+            <div id="right-content">
+                <img src="{{ asset('img/LOGO/gfi-logo3.png') }}"  id="logo_skillz_top"/>
+                <span><a href="inscription" class="mode_current">INSCRIPTION</a> </span>
+                <span><a href="login" class="mode">CONNEXION</a> </span>
+                <form id="connection_form">
+                    <label>IDENTIFIANT</label>
+                    <br/>
+                    <input type="text" name="_login" placeholder="MAIL OU NOM D'UTILISATEUR">
+                    <br/>
+                    <label>MOT DE PASSE</label>
+                    <br/>
+                    <input type="password" name="_password" PLACEHOLDER="Motdepasse123" class="input_mdp_inscription">
+                    <br/>
+                    <input type="password" name="_password_confirm" PLACEHOLDER="Motdepasse123" class="input_mdp_inscription">
+                    <br/>
+                    <label id="password_forgot">Au moins 8 lettres et 1 majuscule</label> <!--ITALIQUE !-->
+                    <br/>
+                    <input type="submit" value="Valider" id="validate_button" >
+                </form>
+                <br/>
+                <img src="{{ asset('img/gfi-transparent.png') }}" id="logo_gfi_bottom" />
+                <span id="lien_gfi">
+                      <a href="http://www.gfi.world/fr/" >ACCUEIL GFI.FR</a>
+            </span>
+
+            </div>
+        </div>
+    {% endblock %}
+{% block footer %}{% endblock %}
