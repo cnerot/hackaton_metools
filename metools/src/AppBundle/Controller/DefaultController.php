@@ -19,7 +19,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        if ($this->getUser() == null){
+        if ($this->getUser() == null) {
             return $this->redirectToRoute('login');
         }
         $r_skill = [];
@@ -30,14 +30,14 @@ class DefaultController extends Controller
         foreach ($skills as $skill) {
             if (!isset($res_skill[$skill->getSkillId()])) {
                 $res_skill[$skill->getSkillId()] = $skill;
-                $r_skill[$skill->getSkillId()]  = $this->getDoctrine()
+                $r_skill[$skill->getSkillId()] = $this->getDoctrine()
                     ->getRepository('AppBundle:skill')
                     ->findOneBy(["id" => $skill->getSkillId()]);
             } else {
                 if ($res_skill[$skill->getSkillId()]->getDate() < $skill->getDate()) {
                     $res_skill[$skill->getSkillId()] = $skill;
                 }
-                $r_skill[$skill->getSkillId()]  = $this->getDoctrine()
+                $r_skill[$skill->getSkillId()] = $this->getDoctrine()
                     ->getRepository('AppBundle:skill')
                     ->findOneBy(["id" => $skill->getSkillId()]);
             }
@@ -57,36 +57,22 @@ class DefaultController extends Controller
                 );
 
         }
-       $skills_res = array();
-        foreach ($skills as $skill){
+        $skills_res = array();
+        foreach ($skills as $skill) {
             $skills_res[$skill->getDate()->format('Y-m-d')][$skill->getSkillId()] = $skill;
         }
-        if ($this->getUser()->getAdmin()=='0')
-        {
-            return $this->render('default/index.html.twig', [
-                'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
-                'skills' => $res_skill,
-                'skills_data' => $r_skill,
-                'all_skills' => $skills_res,
-                'user' => $this->getUser()
-            ]);
-        }
-        else{
-            $users = $this->getDoctrine()
-                ->getRepository('AppBundle:User')
-                ->findAll();
-            $skill = $this->getDoctrine()
-                ->getRepository('AppBundle:skill')
-                ->findAll();
+        return $this->render('default/index.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
+            'skills' => $res_skill,
+            'skills_data' => $r_skill,
+            'all_skills' => $skills_res,
+            'user' => $this->getUser()
+        ]);
 
-            return $this->render('admin/index.html.twig', [
-                'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
-                'users' => $users,
-                'skill' => $skill
-            ]);
-        }
+
     }
-    public function fromArray($entity,array $attributes)
+
+    public function fromArray($entity, array $attributes)
     {
         foreach ($attributes as $name => $value) {
             if (property_exists($this, $name)) {
@@ -99,16 +85,17 @@ class DefaultController extends Controller
             }
         }
     }
+
     /**
      * @Route("/user/edit", name="edituser")
      */
     public function edituserAction(Request $request)
     {
-        if ($this->getUser() == null){
+        if ($this->getUser() == null) {
             return $this->redirectToRoute('login');
         }
         $req = $request->request->all();
-        if (!empty($req["form"])){
+        if (!empty($req["form"])) {
             $n_user = $this->getUser();
             $n_user->setName($req["form"]["name"]);
             $n_user->setSurname($req["form"]["surname"]);
@@ -136,6 +123,7 @@ class DefaultController extends Controller
             'form' => $form->createView(),
         ));
     }
+
     /**
      * @Route("/login", name="login")
      */
@@ -204,7 +192,7 @@ class DefaultController extends Controller
      */
     public function gameAction(Request $request)
     {
-        if ($this->getUser() == null){
+        if ($this->getUser() == null) {
             return $this->redirectToRoute('login');
         }
         $game_end = false;
@@ -372,7 +360,7 @@ class DefaultController extends Controller
     public
     function resultsAction(Request $request)
     {
-        if ($this->getUser() == null){
+        if ($this->getUser() == null) {
             return $this->redirectToRoute('login');
         }
         // replace this example code with whatever you need
@@ -387,7 +375,7 @@ class DefaultController extends Controller
     public
     function evolutionAction(Request $request)
     {
-        if ($this->getUser() == null){
+        if ($this->getUser() == null) {
             return $this->redirectToRoute('login');
         }
         // replace this example code with whatever you need
