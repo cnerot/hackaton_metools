@@ -1,48 +1,48 @@
 {% extends 'admin.html.twig' %}
 
 {% block body %}
-    <a href="{{ url("admin_questioncreate") }}"><button>Nouvelle Question</button></a>
-    <div class="old_questions">
-        <div class="questions">
-            <table>
-                <tr>
-                    <th>Type</th>
-                    <th>contenue</th>
-                    <th>competences</th>
-                    <th>Ajouter une competence</th>
-                </tr>
-                {% for question in questions %}
-                    <tr>
-                        <td>
-                            {% if (question.type ==0) %}QCM{% endif %}
-                            {% if (question.type ==1) %}Chercher l'erreur{% endif %}
-                            {% if (question.type ==2) %}Resultat chiffré{% endif %}
-                            {% if (question.type ==3) %}Vrai/faux{% endif %}
-                        </td>
-                        <td>{{ question.content }}</td>
-                        <td>{% for skill in skills %}
-                                {{ skill.name }}<br>
-                            {% endfor %}
-                        </td>
-                        <td>
-                            <form method="post" action="#">
-                                <input type="hidden" name="question" value="{{ question.id }}">
-                                <select name="skill">
-                                    <option disabled selected>Nan</option>
-                                    {% for skill in skills %}
-                                        <option value="{{ skill.id }}">{{ skill.name }}</option>
-                                    {% endfor %}
-                                </select>
-                                <input type="submit" value="Ajouter la competence">
-                            </form>
-                        </td>
+    <div class="container-fluid">
+        <div class="tableau-admin">
+            <div class="questions">
+                <table>
+                    <tr class="tableau-titres">
+                        <th>Type</th>
+                        <th class="competences-candidat">Contenu</th>
+                        <th class="competences-candidat">Compétences</th>
+                        <th class="competences-candidat">Ajouter une compétence</th>
                     </tr>
+                    {% for question in questions %}
+                        <tr>
+                            <td class="type-question">
+                                {% if (question.type ==0) %}QCM{% endif %}
+                                {% if (question.type ==1) %}Chercher l'erreur{% endif %}
+                                {% if (question.type ==2) %}Resultat chiffré{% endif %}
+                                {% if (question.type ==3) %}Vrai/faux{% endif %}
+                            </td>
+                            <td>{{ question.content }}</td>
+                            <td>{% for skill in skills %}
+                                    {{ skill.name }}<br>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <form method="post" action="#">
+                                    <input type="hidden" name="question" value="{{ question.id }}">
+                                    <select name="skill">
+                                        <option disabled selected>Nan</option>
+                                        {% for skill in skills %}
+                                            <option value="{{ skill.id }}">{{ skill.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <input type="submit" value="Ajouter la competence">
+                                </form>
+                            </td>
+                        </tr>
 
-                {% endfor %}
+                    {% endfor %}
 
-            </table>
-
+                </table>
+                <a href="{{ url("admin_questioncreate") }}"><button class="ajout-question">Nouvelle Question</button></a>
+            </div>
         </div>
-
     </div>
 {% endblock %}

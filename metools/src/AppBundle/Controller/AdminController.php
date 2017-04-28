@@ -203,7 +203,6 @@ class AdminController extends Controller
     {
 
         $data = $request->request->all();
-        var_dump($data);
 
         if (isset($data["question"]) && isset($data["skill"])) {
             $skill = $this->getDoctrine()

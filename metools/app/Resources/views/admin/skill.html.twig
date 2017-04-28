@@ -1,26 +1,27 @@
 {% extends 'admin.html.twig' %}
 
 {% block body %}
-    <a href="{{ url("admin_skillcreate") }}">
-        <button>Nouvelle Question</button>
-    </a>
-    <div class="skills">
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Code</th>
-                <th>Type</th>
-            </tr>
-            {% for skill in skills %}
-                <tr>
-                    <td>{{ skill.name }}</td>
-                    <td>{{ skill.code }}</td>
-                    <td>{{ skill.category }}</td>
+    <div class="container-fluid">
+        <div class="tableau-admin">
+            <table>
+                <tr class="tableau-titres">
+                    <th>Name</th>
+                    <th class="competences-candidat">Code</th>
+                    <th class="competences-candidat">Type</th>
                 </tr>
+                {% for skill in skills %}
+                    <tr class="description-profils">
+                        <td class="type-question">{{ skill.name }}</td>
+                        <td class="competences-candidat">{{ skill.code }}</td>
+                        <td class="competences-candidat">{{ skill.category }}</td>
+                    </tr>
 
-            {% endfor %}
-
-        </table>
+                {% endfor %}
+            </table>
+            <a href="{{ url("admin_skillcreate") }}">
+                <button class="ajout-question">Nouvelle compétence</button>
+            </a>
+        </div>
 
     </div>
 {% endblock %}
