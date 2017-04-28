@@ -1,46 +1,51 @@
 {% extends 'admin.html.twig' %}
 
 {% block body %}
-    <form method="POST" action="{{ url("admin_questioncreate") }}">
-        <label>Fonctionnel</label>
+    <div class="container-fluid">
+        <div class="creation-question">
+            <form method="POST" action="{{ url("admin_questioncreate") }}">
+                <h1>Création question</h1>
 
-            <label>type</label>
-            <select id="question_type" name="question_type">
-                <option value="" disabled selected>Nan</option>
-                <option value="qcm">QCM</option>
-                <option value="error">Chercher l'erreur</option>
-                <option value="number">Resultat chiffré</option>
-                <option value="valid">Validation de code</option>
-            </select><br>
-        <span>Intitulé</span><input type="text" name="content_large">
+                    <label>Type</label><br>
+                    <select id="question_type" name="question_type">
+                        <option value="" disabled selected>Aucun</option>
+                        <option value="qcm">QCM</option>
+                        <option value="error">Chercher l'erreur</option>
+                        <option value="number">Resultat chiffré</option>
+                        <option value="valid">Validation de code</option>
+                    </select><br><br>
+                <label>Intitulé</label><br><input type="text" name="content_large" id="intitule"><br><br>
 
-        <div id="qcm">
-                <span>reponse n°1</span><input type="text" name="qcm_1"><span>vrai?</span><input type="checkbox" name="qcm_1_valid"><br>
-                <span>reponse n°2</span><input type="text" name="qcm_2"><span>vrai?</span><input type="checkbox" name="qcm_2_valid"><br>
-                <span>reponse n°3</span><input type="text" name="qcm_3"><span>vrai?</span><input type="checkbox" name="qcm_3_valid"><br>
-                <span>reponse n°4</span><input type="text" name="qcm_4"><span>vrai?</span><input type="checkbox" name="qcm_4_valid"><br>
-            </div>
-            <div id="error">
-                <span>Code</span><textarea name="error"></textarea><br>
-                <span>ligne contenant l'erreur</span><input type="number"><i>la premiere ligne etant 0</i><br>
-                <input type="submit" value="Ajouter la Question">
+                <div id="qcm">
+                        <label>Réponse n°1 </label><br><input type="text" name="qcm_1"><br><span> Réponse correcte </span><input type="checkbox" name="qcm_1_valid"><br><br>
+                        <label>Réponse n°2 </label><br><input type="text" name="qcm_2"><br><span> Réponse correcte </span><input type="checkbox" name="qcm_2_valid"><br><br>
+                        <label>Réponse n°3 </label><br><input type="text" name="qcm_3"><br><span> Réponse correcte </span><input type="checkbox" name="qcm_3_valid"><br><br>
+                        <label>Réponse n°4 </label><br><input type="text" name="qcm_4"><br><span> Réponse correcte </span><input type="checkbox" name="qcm_4_valid"><br><br>
+                        <input type="submit" class="ajout-question" value="Ajouter la Question">
+                    </div>
+                    <div id="error">
+                        <label>Code</label><br><textarea name="error"></textarea><br><br>
+                        <label>Ligne contenant l'erreur</label><br><input type="number"><br><i>*la première ligne étant 0</i><br><br>
+                        <input type="submit" class="ajout-question" value="Ajouter la Question">
 
-            </div>
-            <div id="number">
-                <span>Reponse</span><input type="number" name="num_res"><br>
-                <input type="submit" value="Ajouter la Question">
+                    </div>
+                    <div id="number">
+                        <label>Réponse </label><br><input type="number" name="num_res"><br><br>
+                        <input type="submit" class="ajout-question" value="Ajouter la Question">
 
-            </div>
-            <div id="valid">
-                <span>Vrai/Faux</span><select name="truefalse">
-                    <option value="1">Oui</option>
-                    <option value="0" selected>Non</option>
-                </select><br>
-                <input type="submit" value="Ajouter la Question">
+                    </div>
+                    <div id="valid">
+                        <label>Vrai/Faux </label><br><select name="truefalse">
+                            <option value="1">Oui</option>
+                            <option value="0" selected>Non</option>
+                        </select><br><br>
+                        <input type="submit" class="ajout-question" value="Ajouter la Question">
 
-            </div>
+                    </div>
 
-    </form>
+            </form>
+        </div>
+    </div>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
