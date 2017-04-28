@@ -1,37 +1,45 @@
 {% extends 'admin.html.twig' %}
 
 {% block body %}
-    <input type="text" placeholder="recchercher un profile">
-    <input type="submit" value="Valider">
-
-
-    <div class="filtres">
-        <div class="filtre">
-            {% for i in 0..10 %}
-                <span class="filtre_label">Filtre 1 <input type="checkbox"></span>
+    <div class="container-fluid" id="recherche-profil">
+        <h1>Rechercher profil</h1>
+        <hr>
+        <input type="text" placeholder="Entrez ici le nom du candidat"><br>
+        <input type="submit" value="Valider">
+        <div class="filtres">
+            <h2>Trier par : </h2>
+            {% for i in 0..4 %}
+                <span class="filtre_label"><input type="checkbox" name="{{ i }}"> Filtre {{ i }} </span><br>
             {% endfor %}
         </div>
     </div>
 
-    <div class="profiles">
-        {% for i in 0..10 %}
-            <div class="profile">
-                <img src="{# add placehoder url here #}">
-                <h3>nom prenom</h3>
-                <div class="questions">
-                    {% for j in 1..3 %}
-                    <div class="question">
-                        <h4>Question  n°{{ j }}</h4>
-                        <p>reponse</p>
-                    </div>
-                    {% endfor %}
-                </div>
-                {% for j in 1..3 %}
-                    <div class="competence">
-                        <h4>Competence {{ j }}</h4>
-                    </div>
+    <div class="container-fluid">
+        <div id="tableau-profils">
+            <table>
+                <tr id="titres">
+                    <td>Nom</td>
+                    <td>Âge</td>
+                    <td>Ville</td>
+                    <td class="competences-candidat">Java</td>
+                    <td class="competences-candidat">Php</td>
+                    <td class="competences-candidat">Ingénieur</td>
+                    <td class="competences-candidat">Leader</td>
+                    <td class="competences-candidat">Créatif</td>
+                </tr>
+                {% for i in 0..10 %}
+                    <tr class="description-profils">
+                        <td><b>Jane Doe</b></td>
+                        <td>24 ans</td>
+                        <td>Paris 75018</td>
+                        <td class="competences-candidat">63</td>
+                        <td class="competences-candidat">82</td>
+                        <td class="competences-candidat">76</td>
+                        <td class="competences-candidat">87</td>
+                        <td class="competences-candidat">34</td>
+                    </tr>
                 {% endfor %}
-            </div>
-        {% endfor %}
+            </table>
+        </div>
     </div>
 {% endblock %}
