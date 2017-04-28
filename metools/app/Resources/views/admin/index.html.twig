@@ -25,11 +25,13 @@
                 </tr>
                 <tbody id="table_content">
                 {% for user in users %}
-                    <tr class="description-profils">
-                        <td><b>{{ user.name }} {{ user.surname }}</b></td>
-                        <td>{{ user.age }} ans</td>
-                        <td>{{ user.address }}</td>
-                    </tr>
+                        <tr class="description-profils">
+
+                            <td><a href="{{ url('admin_profile') }}?user={{ user.id }}"><b>{{ user.name }} {{ user.surname }}</b></a></td>
+                            <td>{{ user.age }} ans</td>
+                            <td>{{ user.address }}</td>
+                        </tr>
+                    </a>
                 {% endfor %}
                 </tbody>
             </table>

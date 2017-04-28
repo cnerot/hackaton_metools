@@ -43,10 +43,14 @@
 
     {% set cpt = 0 %}
     {% for skill in skills %}
-        <div class="col-lg-2">
-            <div class="skill-item">
-                <canvas id="myChart_{{ skill.skillId }}"></canvas>
-            </div>
+        {% if (cpt % 3 == 1) %}
+            <div class="col-lg-offset-3 col-lg-2">
+        {% else %}
+            <div class="col-lg-2">
+        {% endif %}
+        <div class="skill-item">
+            <canvas id="myChart_{{ skill.skillId }}"></canvas>
+        </div>
         </div>
         {% if (cpt % 3 == 0) %}
             </div>
@@ -55,6 +59,9 @@
         {% set cpt = cpt + 1 %}
 
     {% endfor %}
+    </div>
+    <div id="chart">
+        <canvas id="myChart"></canvas>
     </div>
     <!--<div class="col-lg-2">
         <div class="skill-item">
@@ -112,5 +119,45 @@
             }
         });
         {% endfor %}
+
+        var data = {
+            {% for skill in skills %}
+
+            {% endfor %}
+            labels: ["27/04/2017", "28/04/2017"],
+            datasets: [
+                {
+                    label: "Competence 1",
+                    backgroundColor: 'rgba(255,99,132,0)',
+                    borderColor: [
+                        'rgba(0,255,0,1)'
+                    ],
+                    borderWidth: 1,
+                    data: [17, 25]
+                },
+                {
+                    label: "Competence 2",
+                    backgroundColor: 'rgba(255,99,132,0)',
+                    borderColor: [
+                        'rgba(255, 0, 0, 1)'
+                    ],
+                    borderWidth: 1,
+                    data: [3, 0]
+                }
+            ]
+        };
+
+        var ctx = document.getElementById("myChart");
+        var myLineChart = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: {
+                scales: {
+                    xAxes: [{
+                        display: false
+                    }]
+                }
+            }
+        });
     </script>
 {% endblock %}

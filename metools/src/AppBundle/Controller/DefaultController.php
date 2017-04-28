@@ -18,13 +18,13 @@ class DefaultController extends Controller
     {
         $skills = $this->getDoctrine()
             ->getRepository('AppBundle:skill_lvl')
-            ->findBy(["userId" => 1]);
+            ->findBy(["userId" => $this->getUser()->getId()]);
         $res_skill = array();
-        foreach ($skills as $skill){
-            if (!isset($res_skill[$skill->getSkillId()])){
+        foreach ($skills as $skill) {
+            if (!isset($res_skill[$skill->getSkillId()])) {
                 $res_skill[$skill->getSkillId()] = $skill;
             } else {
-                if ( $res_skill[$skill->getSkillId()]->getDate()< $skill->getDate()){
+                if ($res_skill[$skill->getSkillId()]->getDate() < $skill->getDate()) {
                     $res_skill[$skill->getSkillId()] = $skill;
                 }
             }
@@ -33,20 +33,15 @@ class DefaultController extends Controller
         $request->request->all();
         //var_dump($request);
 
-        if (isset($_POST['_login']) && isset($_POST['_password'])){
+        if (isset($_POST['_login']) && isset($_POST['_password'])) {
             $login = $_POST['_login'];
             $password = $_POST['_password'];
 
             $user = $this->getDoctrine()
-                ->getRepository('AppBundle:user')
+                ->getRepository('AppBundle:User')
                 ->findBy(
-                    array('login' => $login,'password' => $password)
-
+                    array('login' => $login, 'password' => $password)
                 );
-
-            var_dump($user);
-
-
         }
 
 
@@ -72,7 +67,7 @@ class DefaultController extends Controller
 
         return $this->render('default/login.html.twig', array(
             'last_username' => $lastUsername,
-            'error'         => $error,
+            'error' => $error,
         ));
     }
 
@@ -85,25 +80,25 @@ class DefaultController extends Controller
 
         // replace this example code with whatever you need
         return $this->render('default/inscription.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+            'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
         ]);
     }
+
     /**
      * @Route("/CreateUser", name="CreateUser")
      */
     public function CreateUserAction(Request $request)
     {
-       $request->request->all();
+        $request->request->all();
 
-        if (isset($_REQUEST['_login']) && isset($_REQUEST['_password']) && isset($_REQUEST['_password_confirm']) && $_REQUEST['_password_confirm']==$_REQUEST['_password'])
-        {
+        if (isset($_REQUEST['_login']) && isset($_REQUEST['_password']) && isset($_REQUEST['_password_confirm']) && $_REQUEST['_password_confirm'] == $_REQUEST['_password']) {
             $user = new user();
-            $user -> setLogin($_REQUEST['_login']);
-            $user -> setName(' ');
-            $user -> setSurname(' ');
-            $user -> setAge('5');
+            $user->setLogin($_REQUEST['_login']);
+            $user->setName(' ');
+            $user->setSurname(' ');
+            $user->setAge('5');
             $user->setAddress('xxx   ');
-            $user -> setPassword($_REQUEST['_password']);
+            $user->setPassword($_REQUEST['_password']);
             $em = $this->getDoctrine()->getManager();
 
             // tells Doctrine you want to (eventually) save the Product (no queries yet)
@@ -112,12 +107,10 @@ class DefaultController extends Controller
             // actually executes the queries (i.e. the INSERT query)
             $em->flush();
             return $this->render('default/success.html.twig');
-        }
-        else{
+        } else {
 
             return $this->render('default/inscription_erreur.html.twig');
         }
-
 
 
     }
@@ -225,10 +218,12 @@ class DefaultController extends Controller
             $questions = null;
             $question_data = null;
         }
+        $redir = false;
         if ($game_end) {
             $this->_endgame();
+            return $this->redirectToRoute('homepage');
         }
-        $progression = ($question_count < $test_length)?round(($anwser_count/$question_count)*100,1):round(($anwser_count/$test_length)*100,1);
+        $progression = ($question_count < $test_length) ? round(($anwser_count / $question_count) * 100, 1) : round(($anwser_count / $test_length) * 100, 1);
         return $this->render('default/game.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
             'question' => $questions,
@@ -236,7 +231,8 @@ class DefaultController extends Controller
             'success' => $success,
             'session' => $_SESSION,
             'test_length' => $test_length,
-            'progression' => $progression
+            'progression' => $progression,
+            'redir' => $redir
         ]);
     }
 
@@ -271,7 +267,7 @@ class DefaultController extends Controller
             $skill_lvl = new skill_lvl();
             $skill_lvl->setLevel(round(($s_t / $s_r) * 100, 1));
             $skill_lvl->setSkillId($k);
-            $skill_lvl->setUserId(1);
+            $skill_lvl->setUserId($this->getUser()->getId());
             $skill_lvl->setDate(new \DateTime());
             $em->persist($skill_lvl);
 
@@ -279,6 +275,8 @@ class DefaultController extends Controller
         $em->flush();
         unset($_SESSION["gamestate"]);
         unset($_SESSION["question"]);
+
+
     }
 
     /**
@@ -304,10 +302,11 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
         ]);
     }
+
     /**
      * @Route("/evolution", name="evolution")
      */
-    function  getloggedAction(Request $request)
+    function getloggedAction(Request $request)
     {
         return $this->render('default/inscription.html.twig');
     }

@@ -1,13 +1,26 @@
 {% extends 'admin.html.twig' %}
 
 {% block body %}
+    <a href="{{ url("admin_skillcreate") }}">
+        <button>Nouvelle Question</button>
+    </a>
     <div class="skills">
-        {% for skill in skills %}
-            <div class="skill">
-                <h3>{{ skill.name }}</h3>
-                <p>{{ skill.code }}</p>
-                {{ skill.category }}
-            </div>
-        {% endfor %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Type</th>
+            </tr>
+            {% for skill in skills %}
+                <tr>
+                    <td>{{ skill.name }}</td>
+                    <td>{{ skill.code }}</td>
+                    <td>{{ skill.category }}</td>
+                </tr>
+
+            {% endfor %}
+
+        </table>
+
     </div>
 {% endblock %}
