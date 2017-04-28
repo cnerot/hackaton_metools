@@ -22,3 +22,6 @@ admin_skillcreate:
 inscription:
   path: /inscription
   defaults: { _controller: AppBundle:Default:Inscription }
+CreateUser:
+  path: /CreateUser
+  defaults: { _controller: AppBundle:Default:CreateUser }

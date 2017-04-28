@@ -17,7 +17,10 @@
                 <span><a href="inscription" class="mode_current">INSCRIPTION</a> </span>
                 <span><a href="login" class="mode">CONNEXION</a> </span>
                 <form id="connection_form" action="{{ path('CreateUser') }}" method="post">
-
+                    <div style="display: inline-block">
+                    <label style="color:red">Une erreur s'est produite</label>
+                    </div>
+                <br/>
 
                     <label>IDENTIFIANT</label>
                     <br/>
