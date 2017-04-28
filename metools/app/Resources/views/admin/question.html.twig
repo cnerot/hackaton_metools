@@ -28,11 +28,11 @@
                                 <form method="post" action="#">
                                     <input type="hidden" name="question" value="{{ question.id }}">
                                     <select name="skill">
-                                        <option disabled selected>Nan</option>
+                                        <option disabled selected>Aucune</option>
                                         {% for skill in skills %}
                                             <option value="{{ skill.id }}">{{ skill.name }}</option>
                                         {% endfor %}
-                                    </select>
+                                    </select><br>
                                     <input type="submit" value="Ajouter la competence">
                                 </form>
                             </td>

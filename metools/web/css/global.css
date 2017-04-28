@@ -443,3 +443,29 @@ canvas, iframe{
     font-weight: bold;
     text-align: left;
 }
+
+#intitule{
+    width: 500px;
+}
+
+.creation-question{
+    margin-bottom: 30px;
+}
+
+.questions select,.questions input[type='submit']{
+    width: 200px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.questions input[type='submit']{
+    background-color: #31374a;
+    border: none;
+    color: #f6f6f6;
+    height:30px;
+    margin-bottom: 20px;
+}
+
+.questions input[type='submit']:hover{
+    background-color: #151822;
+}
