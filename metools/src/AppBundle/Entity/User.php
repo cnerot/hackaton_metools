@@ -2,10 +2,13 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * user
  */
-class user
+class User implements UserInterface
 {
     /**
      * @var int
@@ -195,6 +198,38 @@ class user
     public function getAddress()
     {
         return $this->address;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->login;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function eraseCredentials()
+    {
+        return null;
     }
 }
 
