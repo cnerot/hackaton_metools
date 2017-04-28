@@ -20,7 +20,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $r_skill = [];
-        $skills = $this->getDoctrine()
+       $skills = $this->getDoctrine()
             ->getRepository('AppBundle:skill_lvl')
             ->findBy(["userId" => $this->getUser()->getId()]);
         $res_skill = array();
@@ -52,20 +52,35 @@ class DefaultController extends Controller
                 ->findBy(
                     array('login' => $login, 'password' => $password)
                 );
+
         }
-        $skills_res = array();
+       $skills_res = array();
         foreach ($skills as $skill){
             $skills_res[$skill->getDate()->format('Y-m-d')][$skill->getSkillId()] = $skill;
         }
+        if ($this->getUser()->getAdmin()=='0')
+        {
+            return $this->render('default/index.html.twig', [
+                'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
+                'skills' => $res_skill,
+                'skills_data' => $r_skill,
+                'all_skills' => $skills_res
+            ]);
+        }
+        else{
+            $users = $this->getDoctrine()
+                ->getRepository('AppBundle:User')
+                ->findAll();
+            $skill = $this->getDoctrine()
+                ->getRepository('AppBundle:skill')
+                ->findAll();
 
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
-            'skills' => $res_skill,
-            'skills_data' => $r_skill,
-            'all_skills' => $skills_res,
-            'user' => $this->getUser()
-
-        ]);
+            return $this->render('admin/index.html.twig', [
+                'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
+                'users' => $users,
+                'skill' => $skill
+            ]);
+        }
     }
     public function fromArray($entity,array $attributes)
     {

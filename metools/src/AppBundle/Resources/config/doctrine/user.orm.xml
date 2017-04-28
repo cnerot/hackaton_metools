@@ -10,5 +10,6 @@
     <field name="password" type="string" column="password" length="255"/>
     <field name="age" type="integer" column="age"/>
     <field name="address" type="text" column="address"/>
+    <field name="admin" type="text" column="admin"/>
   </entity>
 </doctrine-mapping>
