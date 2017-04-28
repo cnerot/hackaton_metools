@@ -16,10 +16,10 @@
             <img src="{{ asset('img/LOGO/gfi-logo3.png') }}"  id="logo_skillz_top"/>
             <span><a href="inscription" class="mode">INSCRIPTION</a> </span>
             <span><a href="login" class="mode_current" >CONNEXION</a> </span>
-            <form id="connection_form">
+            <form id="connection_form" method="post" action="{{ path('login') }}">
                 <label>IDENTIFIANT</label>
                 <br/>
-                <input type="text" name="_login" placeholder="MAIL OU NOM D'UTILISATEUR">
+                <input type="text" name="_username" placeholder="MAIL OU NOM D'UTILISATEUR">
                 <br/>
                 <label>MOT DE PASSE</label>
                 <br/>

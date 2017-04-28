@@ -1,0 +1,34 @@
+{% extends 'front.html.twig' %}
+    {% block menu %} {% endblock %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/lucas.css') }}">
+    {% endblock %}
+    {% block header_img %}{% endblock %}
+    {% block header_img_url %}{% endblock %}
+    {% block body %}
+
+        <div id="left">
+
+        </div>
+
+        <div id="right">
+            <div id="right-content">
+                <img src="{{ asset('img/LOGO/gfi-logo3.png') }}"  id="logo_skillz_top"/>
+
+                <form id="connection_form" action="{{ path('login') }}">
+                    <label style="font-size: 2em">INSCRIPTION RÉUSSIE</label>
+                    <br/>
+
+
+                    <input type="submit" value="RETOUR VERS LE LOGIN" id="validate_button" style="width: 450px !important;" >
+                </form>
+                <br/>
+                <img src="{{ asset('img/gfi-transparent.png') }}" id="logo_gfi_bottom" />
+                <span id="lien_gfi">
+                      <a href="http://www.gfi.world/fr/" >ACCUEIL GFI.FR</a>
+            </span>
+
+            </div>
+        </div>
+    {% endblock %}
+{% block footer %}{% endblock %}
