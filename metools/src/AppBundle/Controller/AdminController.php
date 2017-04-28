@@ -67,6 +67,7 @@ class AdminController extends Controller
     public
     function profileAction(Request $request)
     {
+        $r_skill = [];
         $skills = $this->getDoctrine()
             ->getRepository('AppBundle:skill_lvl')
             ->findBy(["userId" => $request->query->get('user')]);
@@ -174,10 +175,10 @@ class AdminController extends Controller
                     $question->setCode($question_data["error"]);
                 } elseif ($question_data["question_type"] == "valid") {
                     $question->setType(2);
-                    $question->getValidline($question_data["truefalse"]);
+                    $question->setValidline($question_data["truefalse"]);
                 } elseif ($question_data["question_type"] == "number") {
                     $question->setType(3);
-                    $question->getValidline($question_data["num_res"]);
+                    $question->setValidline($question_data["num_res"]);
                 } else {
                     /*Error*/
                 }

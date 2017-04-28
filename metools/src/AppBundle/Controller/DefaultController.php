@@ -16,6 +16,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $r_skill = [];
         $skills = $this->getDoctrine()
             ->getRepository('AppBundle:skill_lvl')
             ->findBy(["userId" => $this->getUser()->getId()]);
