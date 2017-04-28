@@ -67,7 +67,8 @@ class DefaultController extends Controller
                 'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
                 'skills' => $res_skill,
                 'skills_data' => $r_skill,
-                'all_skills' => $skills_res
+                'all_skills' => $skills_res,
+                'user' => $this->getUser()
             ]);
         }
         else{
