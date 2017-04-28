@@ -23,8 +23,8 @@ admin_filtered:
   path:     /admin/users/filtered
   defaults: { _controller: AppBundle:Admin:filtered }
 inscription:
-  path: /inscription
+  path:     /inscription
   defaults: { _controller: AppBundle:Default:Inscription }
 CreateUser:
-  path: /CreateUser
+  path:     /CreateUser
   defaults: { _controller: AppBundle:Default:CreateUser }

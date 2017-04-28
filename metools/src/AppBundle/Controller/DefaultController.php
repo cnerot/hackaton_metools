@@ -19,8 +19,11 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        if ($this->getUser() == null){
+            return $this->redirectToRoute('login');
+        }
         $r_skill = [];
-       $skills = $this->getDoctrine()
+        $skills = $this->getDoctrine()
             ->getRepository('AppBundle:skill_lvl')
             ->findBy(["userId" => $this->getUser()->getId()]);
         $res_skill = array();
@@ -100,6 +103,9 @@ class DefaultController extends Controller
      */
     public function edituserAction(Request $request)
     {
+        if ($this->getUser() == null){
+            return $this->redirectToRoute('login');
+        }
         $req = $request->request->all();
         if (!empty($req["form"])){
             $n_user = $this->getUser();
@@ -197,6 +203,9 @@ class DefaultController extends Controller
      */
     public function gameAction(Request $request)
     {
+        if ($this->getUser() == null){
+            return $this->redirectToRoute('login');
+        }
         $game_end = false;
         $test_length = 40;
         /**Check anwser*/
@@ -362,6 +371,9 @@ class DefaultController extends Controller
     public
     function resultsAction(Request $request)
     {
+        if ($this->getUser() == null){
+            return $this->redirectToRoute('login');
+        }
         // replace this example code with whatever you need
         return $this->render('default/results.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
@@ -374,6 +386,9 @@ class DefaultController extends Controller
     public
     function evolutionAction(Request $request)
     {
+        if ($this->getUser() == null){
+            return $this->redirectToRoute('login');
+        }
         // replace this example code with whatever you need
         return $this->render('default/evolution.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,

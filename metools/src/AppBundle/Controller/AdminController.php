@@ -16,11 +16,11 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class AdminController extends Controller
 {
-    /**
-     * @Route("/", name="homepage")
-     */
     public function indexAction(Request $request)
     {
+        if ($this->getUser() == null){
+            return $this->redirectToRoute('login');
+        }
         $users = $this->getDoctrine()
             ->getRepository('AppBundle:User')
             ->findAll();
@@ -38,6 +38,9 @@ class AdminController extends Controller
 
     public function filteredAction(Request $request)
     {
+        if ($this->getUser() == null){
+            return $this->redirectToRoute('login');
+        }
         $req = $request->request->all();
         if ($req['filter'] == "") {
             $users = $this->getDoctrine()
@@ -78,6 +81,9 @@ class AdminController extends Controller
     public
     function profileAction(Request $request)
     {
+        if ($this->getUser() == null){
+            return $this->redirectToRoute('login');
+        }
         $r_skill = [];
         $skills = $this->getDoctrine()
             ->getRepository('AppBundle:skill_lvl')
@@ -119,6 +125,9 @@ class AdminController extends Controller
     public
     function skillsAction(Request $request)
     {
+        if ($this->getUser() == null){
+            return $this->redirectToRoute('login');
+        }
         $skills = $this->getDoctrine()
             ->getRepository('AppBundle:skill')
             ->findAll();
@@ -132,6 +141,9 @@ class AdminController extends Controller
     public
     function skillscreateAction(Request $request)
     {
+        if ($this->getUser() == null){
+            return $this->redirectToRoute('login');
+        }
         $skill_data = $request->request->all();
         if (!empty($skill_data)) {
             $skill = new skill();
@@ -151,6 +163,9 @@ class AdminController extends Controller
     public
     function questioncreateAction(Request $request)
     {
+        if ($this->getUser() == null){
+            return $this->redirectToRoute('login');
+        }
         $error = false;
         $question_data = $request->request->all();
         if (!empty($question_data)) {
@@ -212,6 +227,9 @@ class AdminController extends Controller
     public
     function questionAction(Request $request)
     {
+        if ($this->getUser() == null){
+            return $this->redirectToRoute('login');
+        }
 
         $data = $request->request->all();
 
